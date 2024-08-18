@@ -69,7 +69,7 @@ class _CustomProfileVideoItemState extends State<CustomProfileVideoItem> {
                           Navigator.pushNamed(
                             context,
                             AppRouter.channelDetailsViewRoute,
-                            arguments: state.channelDetails[0],
+                            arguments: state.channelDetails,
                           );
                         },
                         child: CircleAvatar(
@@ -79,7 +79,7 @@ class _CustomProfileVideoItemState extends State<CustomProfileVideoItem> {
                             borderRadius: BorderRadius.circular(50),
                             child: CachedNetworkImage(
                               imageUrl:
-                                  "${state.channelDetails[0].snippet!.thumbnails!.thumbnailsDefault!.url}",
+                                  "${state.channelDetails.snippet!.thumbnails!.thumbnailsDefault!.url}",
                               fit: BoxFit.fill,
                               errorWidget: (context, url, error) {
                                 return Icon(

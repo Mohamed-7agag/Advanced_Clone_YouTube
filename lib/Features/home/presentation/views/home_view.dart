@@ -10,7 +10,7 @@ class HomeView extends StatelessWidget {
     return const Scaffold(
       drawer: CustomDrawer(),
       body: SafeArea(
-        child: HomeScrollableContnt(),
+        child: HomeScrollableContent(),
       ),
     );
   }

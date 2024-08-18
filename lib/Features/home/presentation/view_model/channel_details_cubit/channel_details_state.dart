@@ -18,7 +18,7 @@ final class ChannelDetailsFailure extends ChannelDetailsState {
 }
 
 final class ChannelDetailsSuccess extends ChannelDetailsState {
-  final List<ChannelDetailModel> channelDetails;
+  final ChannelDetailModel channelDetails;
 
   const ChannelDetailsSuccess({required this.channelDetails});
 }

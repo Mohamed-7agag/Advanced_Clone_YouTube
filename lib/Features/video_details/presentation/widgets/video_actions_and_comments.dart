@@ -44,7 +44,7 @@ class VideoActionAndComments extends StatelessWidget {
                           Navigator.pushNamed(
                             context,
                             AppRouter.channelDetailsViewRoute,
-                            arguments: state.channelDetails[0],
+                            arguments: state.channelDetails,
                           );
                         },
                         child: CircleAvatar(
@@ -53,7 +53,7 @@ class VideoActionAndComments extends StatelessWidget {
                             borderRadius: BorderRadius.circular(50),
                             child: CachedNetworkImage(
                               imageUrl:
-                                  "${state.channelDetails[0].snippet!.thumbnails!.thumbnailsDefault!.url}",
+                                  "${state.channelDetails.snippet!.thumbnails!.thumbnailsDefault!.url}",
                               fit: BoxFit.fill,
                               errorWidget: (context, url, error) {
                                 return Icon(
@@ -84,7 +84,7 @@ class VideoActionAndComments extends StatelessWidget {
                                   style: Styles.textStyle15,
                                 ),
                           Text(
-                            "${refactNumber(state.channelDetails[0].statistics!.subscriberCount)} Subscriber",
+                            "${refactNumber(state.channelDetails.statistics!.subscriberCount)} Subscriber",
                             style: Styles.textStyle11,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -98,7 +98,7 @@ class VideoActionAndComments extends StatelessWidget {
                       bool ok = CacheHelper.getStringList(
                               key: subscribedChannelsKey)
                           .contains(
-                              json.encode(state.channelDetails[0].toJson()));
+                              json.encode(state.channelDetails.toJson()));
                       return CustomButton(
                         text: ok == true ? "Subscribed" : "Subscribe",
                         backgroundColor:
@@ -115,11 +115,11 @@ class VideoActionAndComments extends StatelessWidget {
                         onPressed: () {
                           if (state1 == SubscriptionsState.subscribed) {
                             context.read<SubscriptionsCubit>().unSubscribed(
-                                  channelDetailModel: state.channelDetails[0],
+                                  channelDetailModel: state.channelDetails,
                                 );
                           } else {
                             context.read<SubscriptionsCubit>().subscribed(
-                                  channelDetailModel: state.channelDetails[0],
+                                  channelDetailModel: state.channelDetails,
                                 );
                           }
                         },

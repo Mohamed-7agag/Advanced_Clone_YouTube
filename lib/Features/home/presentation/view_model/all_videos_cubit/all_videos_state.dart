@@ -1,24 +1,30 @@
 part of 'all_videos_cubit.dart';
 
-sealed class AllVideosState extends Equatable {
+abstract class AllVideosState extends Equatable {
   const AllVideosState();
 
   @override
   List<Object> get props => [];
 }
 
-final class AllVideosInitial extends AllVideosState {}
+class AllVideosInitial extends AllVideosState {}
 
-final class AllVideosLoading extends AllVideosState {}
+class AllVideosLoading extends AllVideosState {}
 
-final class AllVideosFailure extends AllVideosState {
+class AllVideosFailure extends AllVideosState {
   final String errMessage;
 
   const AllVideosFailure({required this.errMessage});
+
+  @override
+  List<Object> get props => [errMessage];
 }
 
-final class AllVideosSuccess extends AllVideosState {
-  final List<VideoModel> videos;
+class AllVideosSuccess extends AllVideosState {
+  final List<Map<String, dynamic>> videosWithChannelDetails;
 
-  const AllVideosSuccess({required this.videos});
+  const AllVideosSuccess({required this.videosWithChannelDetails});
+
+  @override
+  List<Object> get props => [videosWithChannelDetails];
 }

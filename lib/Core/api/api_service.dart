@@ -2,6 +2,7 @@ import 'package:advanced_youtube/Core/api/api_requests.dart';
 import 'package:advanced_youtube/Core/api/end_points.dart';
 import 'package:advanced_youtube/Core/errors/exception.dart';
 import 'package:dio/dio.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ApiServices extends ApiRequests {
   final Dio _dio;
@@ -12,23 +13,24 @@ class ApiServices extends ApiRequests {
     _dio.options.receiveDataWhenStatusError = true;
     _dio.options.connectTimeout = const Duration(seconds: 15);
     _dio.options.receiveTimeout = const Duration(seconds: 15);
-    _dio.interceptors.add(LogInterceptor(
-      request: true,
+    _dio.interceptors.add(PrettyDioLogger(
       requestHeader: true,
       requestBody: true,
       responseHeader: true,
-      responseBody: true,
-      error: true,
     ));
   }
 
 //! Get All Videos
   @override
-  Future getAllVideos(String? q) async {
+  Future getAllVideos(String? q, String videoType) async {
     try {
-      final response = (q == null || q == "All")
-          ? await _dio.get(EndPoint.allVideos)
-          : await _dio.get("${EndPoint.allVideos}&q=$q");
+      String endpoints = "";
+      if (q == null || q == "All") {
+        endpoints = EndPoint.allVideos + videoType;
+      } else {
+        endpoints = "${EndPoint.allVideos}$videoType&q=$q";
+      }
+      final response = await _dio.get(endpoints);
       return response.data;
     } on DioException catch (e) {
       handleDioExceptions(e);
@@ -70,17 +72,7 @@ class ApiServices extends ApiRequests {
   }
 
   @override
-  Future getAllShortsVideos() async {
-    try {
-      final response = await _dio.get(EndPoint.allShortsVideos);
-      return response.data;
-    } on DioException catch (e) {
-      handleDioExceptions(e);
-    }
-  }
-  
-  @override
-  Future getSearchedVideos({required String text}) async{
+  Future getSearchedVideos({required String text}) async {
     try {
       final response = await _dio.get("${EndPoint.allSpecificVideos}$text");
       return response.data;

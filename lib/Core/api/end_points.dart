@@ -1,12 +1,12 @@
 class EndPoint {
   static String baseUrl = "https://youtube.googleapis.com/youtube/v3/"; 
-  static String key = "AIzaSyBY9dMy6nuSogmzb-QvM_-Q-jOq0zaUlTc"; 
+  static String key = "AIzaSyCnfypfybsZA_F8JXD63biAlCmXCNx5dX0"; 
   static String allVideos =
-      "search?key=$key&part=snippet&maxResults=50&type=video&videoDuration=medium";
+      "search?key=$key&part=snippet&maxResults=20&type=video&videoDuration=";
   static String allSpecificVideos =
-      "search?key=$key&part=snippet&maxResults=50&type=video&videoDuration=medium&q=";
+      "search?key=$key&part=snippet&maxResults=20&type=video&videoDuration=medium&q=";
   static String allShortsVideos =
-      "search?key=$key&part=snippet&maxResults=50&type=video&videoDuration=short";
+      "search?key=$key&part=snippet&maxResults=20&type=video&videoDuration=short";
   static String statisticsOfVideo =
       "videos?key=$key&part=statistics&id=";
   static String channelDetails =

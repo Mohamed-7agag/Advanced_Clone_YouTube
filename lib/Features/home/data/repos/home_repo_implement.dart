@@ -12,9 +12,10 @@ class HomeRepoImplement implements HomeRepo {
 
   //! method to get all Videos and video Details
   @override
-  Future<Either<String, List<VideoModel>>> getAllVideos(String? q) async {
+  Future<Either<String, List<VideoModel>>> getAllVideos(
+      String? q, String videoType) async {
     try {
-      var data = await apiServices.getAllVideos(q);
+      var data = await apiServices.getAllVideos(q, videoType);
       List<VideoModel> videos = [];
       for (var item in data['items']) {
         videos.add(VideoModel.fromJson(item));
@@ -27,29 +28,13 @@ class HomeRepoImplement implements HomeRepo {
 
   //! method to get Channel Details
   @override
-  Future<Either<String, List<ChannelDetailModel>>> getChannelDetails(
+  Future<Either<String, ChannelDetailModel>> getChannelDetails(
       {required String channelId}) async {
     try {
       var data = await apiServices.getChannelDetails(channelId: channelId);
-      List<ChannelDetailModel> channelDetails = [];
-      for (var item in data['items']) {
-        channelDetails.add(ChannelDetailModel.fromJson(item));
-      }
+      ChannelDetailModel channelDetails =
+          ChannelDetailModel.fromJson(data['items'][0]);
       return right(channelDetails);
-    } on ServerException catch (e) {
-      return left(e.errModel.errorMessage);
-    }
-  }
-  
-  @override
-  Future<Either<String, List<VideoModel>>> getAllShortsVideos() async{
-    try {
-      var data = await apiServices.getAllShortsVideos();
-      List<VideoModel> shortsVideos = [];
-      for (var item in data['items']) {
-        shortsVideos.add(VideoModel.fromJson(item));
-      }
-      return right(shortsVideos);
     } on ServerException catch (e) {
       return left(e.errModel.errorMessage);
     }

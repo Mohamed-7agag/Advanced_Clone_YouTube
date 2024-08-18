@@ -17,7 +17,7 @@ class CustomDrawer extends StatelessWidget {
         children: [
           Padding(
             padding:
-                const EdgeInsets.only(top: 18, bottom: 12, left: 14, right: 5),
+                const EdgeInsets.only(top: 45, bottom: 12, left: 14, right: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

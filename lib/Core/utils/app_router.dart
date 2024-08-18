@@ -4,7 +4,6 @@ import 'package:advanced_youtube/Features/channel_details/presentation/view_mode
 import 'package:advanced_youtube/Features/channel_details/presentation/views/channel_details_view.dart';
 import 'package:advanced_youtube/Features/home/data/models/video_model/video_model.dart';
 import 'package:advanced_youtube/Features/home/data/repos/home_repo_implement.dart';
-import 'package:advanced_youtube/Features/home/presentation/view_model/all_shorts_videos/all_shorts_videos_cubit.dart';
 import 'package:advanced_youtube/Features/home/presentation/view_model/all_videos_cubit/all_videos_cubit.dart';
 import 'package:advanced_youtube/Features/home/presentation/view_model/channel_details_cubit/channel_details_cubit.dart';
 import 'package:advanced_youtube/Features/home/presentation/view_model/tabs_cubit.dart';
@@ -55,13 +54,9 @@ class AppRouter {
               BlocProvider(
                 create: (context) => AllVideosCubit(
                   getIt.get<HomeRepoImplement>(),
-                )..getAllVideos(null),
+                )..getAllVideos(null,'medium'),
               ),
-              BlocProvider(
-                create: (context) => AllShortsVideosCubit(
-                  getIt.get<HomeRepoImplement>(),
-                )..getAllShortsVideos(),
-              ),
+             
               BlocProvider(
                 create: (context) => ChannelDetailsCubit(
                   getIt.get<HomeRepoImplement>(),
@@ -72,12 +67,10 @@ class AppRouter {
                     SubscriptionsCubit()..getSubscribedChannels(),
               ),
               BlocProvider(
-                create: (context) =>
-                    BottomNavigationBarCubit(),
+                create: (context) => BottomNavigationBarCubit(),
               ),
               BlocProvider(
-                create: (context) =>
-                    TabsCubit(),
+                create: (context) => TabsCubit(),
               ),
               BlocProvider(
                 create: (context) => VideoInteractiveCubit()..getLikedVideos(),
@@ -86,7 +79,7 @@ class AppRouter {
                 create: (context) => SavedVideosCubit()..getsavedVideos(),
               ),
             ],
-            child:  CustomBottomAppBar(),
+            child: CustomBottomAppBar(),
           ),
         );
       //! homeView

@@ -6,40 +6,44 @@ import 'package:advanced_youtube/Features/home/presentation/widgets/home_list_vi
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeScrollableContnt extends StatelessWidget {
-  const HomeScrollableContnt({super.key});
+class HomeScrollableContent extends StatelessWidget {
+  const HomeScrollableContent({super.key});
 
   @override
   Widget build(BuildContext context) {
     return NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-      return [const CustomAppBar()];
-    }, body: BlocBuilder<AllVideosCubit, AllVideosState>(
-      builder: (context, state) {
-        if (state is AllVideosSuccess) {
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return [const CustomAppBar()];
+      },
+      body: BlocBuilder<AllVideosCubit, AllVideosState>(
+        builder: (context, state) {
+          if (state is AllVideosSuccess) {
+            return ListView.builder(
+              itemCount: state.videosWithChannelDetails.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: HomeListViewItem(
+                    videoModel: state.videosWithChannelDetails[index]['video'],
+                    channelDetailModel: state.videosWithChannelDetails[index]
+                        ['channelDetails'],
+                  ),
+                );
+              },
+            );
+          } else if (state is AllVideosFailure) {
+            return const CustomErrorWidget();
+          }
           return ListView.builder(
-            itemCount: state.videos.length,
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: 3,
             itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 12),
-                child: HomeListViewItem(
-                  videoModel: state.videos[index],
-                ),
-              );
+              return const ShimmerEffect();
             },
           );
-        } else if (state is AllVideosFailure) {
-          return const CustomErrorWidget();
-        }
-        return ListView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: 3,
-          itemBuilder: (BuildContext context, int index) {
-            return const ShimmerEffect();
-          },
-        );
-      },
-    ));
+        },
+      ),
+    );
   }
 }
