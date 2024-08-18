@@ -11,44 +11,35 @@ class HomeScrollableContnt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        const CustomAppBar(),
-        SliverList.builder(
-        itemCount: 1,
-          itemBuilder: (context, index) {
-            return BlocBuilder<AllVideosCubit, AllVideosState>(
-              builder: (context, state) {
-                if (state is AllVideosSuccess) {
-                  return ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: state.videos.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 12),
-                        child: HomeListViewItem(
-                          videoModel: state.videos[index],
-                        ),
-                      );
-                    },
-                  );
-                } else if (state is AllVideosFailure) {
-                  return const CustomErrorWidget();
-                }
-                return ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 3,
-                  itemBuilder: (BuildContext context, int index) {
-                    return const ShimmerEffect();
-                  },
-                );
-              },
-            );
+    return NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+      return [const CustomAppBar()];
+    }, body: BlocBuilder<AllVideosCubit, AllVideosState>(
+      builder: (context, state) {
+        if (state is AllVideosSuccess) {
+          return ListView.builder(
+            itemCount: state.videos.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: HomeListViewItem(
+                  videoModel: state.videos[index],
+                ),
+              );
+            },
+          );
+        } else if (state is AllVideosFailure) {
+          return const CustomErrorWidget();
+        }
+        return ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: 3,
+          itemBuilder: (BuildContext context, int index) {
+            return const ShimmerEffect();
           },
-        ),
-      ],
-    );
+        );
+      },
+    ));
   }
 }

@@ -7,10 +7,10 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Scaffold(
-        drawer: CustomDrawer(),
-        body: HomeScrollableContnt(),
+    return const Scaffold(
+      drawer: CustomDrawer(),
+      body: SafeArea(
+        child: HomeScrollableContnt(),
       ),
     );
   }

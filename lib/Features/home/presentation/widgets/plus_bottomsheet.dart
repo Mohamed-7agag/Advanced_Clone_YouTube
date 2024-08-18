@@ -5,11 +5,11 @@ openBottomSheet(context) {
   showModalBottomSheet(
     builder: (context) {
       return Container(
-        padding: const EdgeInsets.only(left: 12, top: 10, right: 6, bottom: 20),
-        height: 360,
+        padding: const EdgeInsets.only(left: 12, top: 8, right: 6, bottom: 20),
+        height: 320,
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+              topLeft: Radius.circular(14), topRight: Radius.circular(14)),
           color: Colors.white,
         ),
         child: Column(
@@ -29,7 +29,7 @@ openBottomSheet(context) {
                     },
                     icon: const Icon(
                       Icons.close_rounded,
-                      size: 35,
+                      size: 30,
                       color: Colors.black,
                     )),
               ],

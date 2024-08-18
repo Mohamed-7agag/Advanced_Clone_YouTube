@@ -10,8 +10,9 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+
       bottom: const PreferredSize(
-        preferredSize: Size.fromHeight(38.0),
+        preferredSize: Size.fromHeight(45.0),
         child: BottomTabsAppBar(),
       ),
       floating: true,
@@ -32,15 +33,9 @@ class CustomAppBar extends StatelessWidget {
             Icons.cast,
           ),
         ),
-        SizedBox(
-          width: 7.w,
-        ),
         const Icon(
           Icons.notifications_none_outlined,
           size: 26,
-        ),
-        SizedBox(
-          width: 7.w,
         ),
         IconButton(
           onPressed: () {
@@ -51,6 +46,7 @@ class CustomAppBar extends StatelessWidget {
             size: 25,
           ),
         ),
+        SizedBox(width: 5.w),
       ],
     );
   }

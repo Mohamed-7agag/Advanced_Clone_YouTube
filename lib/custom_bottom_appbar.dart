@@ -26,9 +26,9 @@ class CustomBottomAppBar extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           bottomNavigationBar: BottomNavigationBar(
-            unselectedLabelStyle: Styles.textStyle11,
-            selectedLabelStyle:
-                Styles.textStyle11.copyWith(color: Colors.black),
+            selectedLabelStyle: Styles.textStyle11,
+            showUnselectedLabels: false,
+            fixedColor: Colors.black,
             selectedIconTheme: const IconThemeData(color: Colors.black),
             unselectedIconTheme: const IconThemeData(color: Colors.black),
             type: BottomNavigationBarType.fixed,
@@ -75,7 +75,10 @@ class CustomBottomAppBar extends StatelessWidget {
               ),
             ],
           ),
-          body: screens[state.index >= 2 ? state.index - 1 : state.index],
+          body: IndexedStack(
+            index: state.index >= 2 ? state.index - 1 : state.index,
+            children: screens,
+          ),
         );
       },
     );
