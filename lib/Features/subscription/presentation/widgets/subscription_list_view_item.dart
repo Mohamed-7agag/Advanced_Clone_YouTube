@@ -21,7 +21,7 @@ class SubscriptionListViewItem extends StatelessWidget {
       children: [
         Row(
           children: [
-            InkWell(
+            GestureDetector(
               onTap: () {
                 Navigator.pushNamed(
                   context,
@@ -34,13 +34,13 @@ class SubscriptionListViewItem extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl:
                       "${channelDetailModel.snippet!.thumbnails!.medium!.url}",
-                  width: 65.w,
-                  height: 65.h,
+                  width: 56,
+                  height: 56,
                   fit: BoxFit.fill,
                   errorWidget: (context, url, error) {
                     return Icon(
                       Icons.error_outline_rounded,
-                      size: 40,
+                      size: 35,
                       color: Colors.grey[400],
                     );
                   },
@@ -75,8 +75,22 @@ class SubscriptionListViewItem extends StatelessWidget {
           offset: const Offset(-25, 25),
           itemBuilder: (context) => [
             PopupMenuItem(
+              value: "View Channel",
+              height: 20,
+              padding: const EdgeInsets.only(bottom: 16, left: 14, right: 14),
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  AppRouter.channelDetailsViewRoute,
+                  arguments: channelDetailModel,
+                );
+              },
+              child: const Text("View Channel"),
+            ),
+            PopupMenuItem(
               value: "unsubscribe",
               height: 12,
+              padding: const EdgeInsets.only(bottom: 6, left: 10, right: 10),
               onTap: () {
                 context.read<SubscriptionsCubit>().unSubscribed(
                       channelDetailModel: channelDetailModel,

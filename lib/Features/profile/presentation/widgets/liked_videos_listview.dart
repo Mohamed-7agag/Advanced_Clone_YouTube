@@ -25,7 +25,7 @@ class LikedVideosListView extends StatelessWidget {
               itemCount: items.length,
               itemBuilder: (BuildContext context, int index) {
                 return SizedBox(
-                  width: 250,
+                  width: 220,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: SizedBox(

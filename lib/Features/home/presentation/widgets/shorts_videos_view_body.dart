@@ -7,7 +7,7 @@ import 'package:advanced_youtube/Core/widgets/custom_loading_widget.dart';
 import 'package:advanced_youtube/Features/home/data/repos/home_repo_implement.dart';
 import 'package:advanced_youtube/Features/home/presentation/view_model/all_videos_cubit/all_videos_cubit.dart';
 
-import 'home_list_view_item.dart';
+import 'custom_video_item.dart';
 
 class ShortsVideosViewBody extends StatelessWidget {
   const ShortsVideosViewBody({super.key});
@@ -15,7 +15,8 @@ class ShortsVideosViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AllVideosCubit(getIt.get<HomeRepoImplement>())..getAllVideos(null, 'short'),
+      create: (context) => AllVideosCubit(getIt.get<HomeRepoImplement>())
+        ..getAllVideos(null, 'short'),
       child: BlocBuilder<AllVideosCubit, AllVideosState>(
         builder: (context, state) {
           if (state is AllVideosSuccess) {
@@ -24,7 +25,7 @@ class ShortsVideosViewBody extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 12),
-                  child: HomeListViewItem(
+                  child: CustomVideoItem(
                       videoModel: state.videosWithChannelDetails[index]
                           ['video'],
                       channelDetailModel: state.videosWithChannelDetails[index]

@@ -2,7 +2,7 @@ import 'package:advanced_youtube/Core/widgets/custom_error_widget.dart';
 import 'package:advanced_youtube/Core/widgets/shimmer_effect.dart';
 import 'package:advanced_youtube/Features/home/presentation/view_model/all_videos_cubit/all_videos_cubit.dart';
 import 'package:advanced_youtube/Features/home/presentation/widgets/custom_appbar.dart';
-import 'package:advanced_youtube/Features/home/presentation/widgets/home_list_view_item.dart';
+import 'package:advanced_youtube/Features/home/presentation/widgets/custom_video_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,7 +23,7 @@ class HomeScrollableContent extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 12),
-                  child: HomeListViewItem(
+                  child: CustomVideoItem(
                     videoModel: state.videosWithChannelDetails[index]['video'],
                     channelDetailModel: state.videosWithChannelDetails[index]
                         ['channelDetails'],

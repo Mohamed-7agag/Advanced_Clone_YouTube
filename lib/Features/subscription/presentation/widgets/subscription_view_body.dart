@@ -15,12 +15,12 @@ class SubscriptionViewBody extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 10.h),
+        SizedBox(height: 5.h),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(
             "Your Subscriptions",
-            style: Styles.textStyle24,
+            style: Styles.textStyle20,
           ),
         ),
         Divider(
@@ -38,7 +38,7 @@ class SubscriptionViewBody extends StatelessWidget {
                   return Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: SubscriptionListViewItem(
                           channelDetailModel: items[index],
                         ),

@@ -14,7 +14,10 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushReplacementNamed(context, AppRouter.customBottomAppBarRoute);
+      if (context.mounted) {
+        Navigator.pushReplacementNamed(
+            context, AppRouter.customBottomAppBarRoute);
+      }
     });
     super.initState();
   }

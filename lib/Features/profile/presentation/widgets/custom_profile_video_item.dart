@@ -38,7 +38,7 @@ class _CustomProfileVideoItemState extends State<CustomProfileVideoItem> {
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Container(
-              height: 140.h,
+              height: 120.h,
               width: double.infinity,
               color: Colors.grey[100],
               child: CachedNetworkImage(

@@ -1,5 +1,6 @@
 import 'package:advanced_youtube/Core/utils/constants.dart';
 import 'package:advanced_youtube/Core/utils/styles.dart';
+import 'package:advanced_youtube/Features/profile/presentation/widgets/profile_property_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'liked_videos_listview.dart';
@@ -58,52 +59,25 @@ class ProfileViewBody extends StatelessWidget {
             const SavedVideosListView(),
             Divider(color: kGrey300, thickness: 0.4),
             SizedBox(height: 10.h),
-            Row(
-              children: [
-                const Icon(
-                  Icons.settings_rounded,
-                  size: 32,
-                ),
-                SizedBox(width: 16.w),
-                Text(
-                  "Setting",
-                  style: Styles.textStyle18,
-                ),
-              ],
+            const ProfilePropertyItem(
+              icon: Icons.settings_rounded,
+              title: "Setting",
             ),
-            SizedBox(height: 20.h),
-            Row(
-              children: [
-                const Icon(
-                  Icons.bar_chart_rounded,
-                  size: 32,
-                ),
-                SizedBox(width: 16.w),
-                Text(
-                  "Time Watched",
-                  style: Styles.textStyle18,
-                ),
-              ],
+            SizedBox(height: 18.h),
+            const ProfilePropertyItem(
+              icon: Icons.bar_chart_rounded,
+              title: "Time Watched",
             ),
-            SizedBox(height: 20.h),
-            Row(
-              children: [
-                const Icon(
-                  Icons.help_outline_rounded,
-                  size: 32,
-                ),
-                SizedBox(width: 16.w),
-                Text(
-                  "Help & Feedback",
-                  style: Styles.textStyle18,
-                ),
-              ],
+            SizedBox(height: 18.h),
+            const ProfilePropertyItem(
+              icon: Icons.help_outline_rounded,
+              title: "Help & Feedback",
             ),
-            SizedBox(height: 20.h),
-
+            SizedBox(height: 18.h),
           ],
         ),
       ),
     );
   }
 }
+
