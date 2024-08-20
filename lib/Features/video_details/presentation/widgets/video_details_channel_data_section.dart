@@ -1,4 +1,5 @@
 import 'package:advanced_youtube/Features/home/data/models/video_model/video_model.dart';
+import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,7 +71,7 @@ class VideoDetailsChannelDataSection extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        "${refactNumber(state.channelDetails.statistics!.subscriberCount)} Subscriber",
+                        "${refactNumber(state.channelDetails.statistics!.subscriberCount)} ${S.of(context).subscriber}",
                         style: Styles.textStyle11,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

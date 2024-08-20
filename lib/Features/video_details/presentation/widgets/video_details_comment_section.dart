@@ -1,4 +1,5 @@
 import 'package:advanced_youtube/Core/utils/styles.dart';
+import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -24,7 +25,7 @@ class VideoDetailsCommentsSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Comments  ${videoStatisticsModel.statistics!.commentCount ?? 0}",
+            "${S.of(context).comment}  ${videoStatisticsModel.statistics!.commentCount ?? 0}",
             style: Styles.textStyle14,
           ),
           SizedBox(height: 10.h),
@@ -38,14 +39,14 @@ class VideoDetailsCommentsSection extends StatelessWidget {
               Expanded(
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: const EdgeInsetsDirectional.only(start: 10),
                   height: 22,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
                     color: Colors.grey[300],
                   ),
                   child: Text(
-                    "Add a comment",
+                    S.of(context).addComment,
                     style: Styles.textStyle12,
                   ),
                 ),

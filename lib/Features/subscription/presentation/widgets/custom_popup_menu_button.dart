@@ -1,3 +1,4 @@
+import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,7 +24,7 @@ class CustomPopupMenuButton extends StatelessWidget {
       offset: const Offset(-25, 25),
       itemBuilder: (context) => [
         PopupMenuItem(
-          value: "View Channel",
+          value: S.of(context).viewChannel,
           onTap: () {
             Navigator.pushNamed(
               context,
@@ -31,27 +32,27 @@ class CustomPopupMenuButton extends StatelessWidget {
               arguments: channelDetailModel,
             );
           },
-          child: const Text(
-            "View Channel",
-            style: TextStyle(color: Colors.white),
+          child: Text(
+            S.of(context).viewChannel,
+            style: const TextStyle(color: Colors.white),
           ),
         ),
         PopupMenuItem(
-          value: "unsubscribe",
+          value: S.of(context).unsubscribe,
           onTap: () {
             context.read<SubscriptionCubit>().toggleSubscription(
                   channelDetailModel: channelDetailModel,
                 );
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
+              SnackBar(
                 backgroundColor: Colors.black87,
-                content: Text("Subscription has been cancelled"),
+                content: Text(S.of(context).subscriptionCancelled),
               ),
             );
           },
-          child: const Text(
-            "Unsubscribe",
-            style: TextStyle(color: Colors.red),
+          child: Text(
+            S.of(context).unsubscribe,
+            style: const TextStyle(color: Colors.red),
           ),
         ),
       ],

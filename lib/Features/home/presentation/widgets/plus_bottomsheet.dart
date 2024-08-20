@@ -1,12 +1,14 @@
 import 'package:advanced_youtube/Core/utils/styles.dart';
 import 'package:advanced_youtube/Features/home/presentation/widgets/bottom_sheet_item.dart';
+import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 openBottomSheet(context) {
   showModalBottomSheet(
     builder: (context) {
       return Container(
-        padding: const EdgeInsets.only(left: 14, top: 8, right: 8, bottom: 20),
+        padding: const EdgeInsetsDirectional.only(
+            start: 14, top: 8, end: 8, bottom: 20),
         height: 320,
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -20,8 +22,8 @@ openBottomSheet(context) {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                 Text(
-                  "Create",
+                Text(
+                  S.of(context).create,
                   style: Styles.textStyle22,
                 ),
                 IconButton(
@@ -35,33 +37,33 @@ openBottomSheet(context) {
                     )),
               ],
             ),
-            const BottomSheetItem(
-              text: "Create a Short",
-              icon: Icon(
+            BottomSheetItem(
+              text: S.of(context).createShort,
+              icon: const Icon(
                 Icons.edit,
                 color: Colors.black87,
                 size: 22,
               ),
             ),
-            const BottomSheetItem(
-              text: "Upload a Video",
-              icon: Icon(
+            BottomSheetItem(
+              text: S.of(context).uploadVideo,
+              icon: const Icon(
                 Icons.upload_rounded,
                 color: Colors.black87,
                 size: 27,
               ),
             ),
-            const BottomSheetItem(
-              text: "Go Live",
-              icon: Icon(
+            BottomSheetItem(
+              text: S.of(context).goLive,
+              icon: const Icon(
                 Icons.podcasts_rounded,
                 color: Colors.black87,
                 size: 22,
               ),
             ),
-            const BottomSheetItem(
-              text: "Create a Post",
-              icon: Icon(
+            BottomSheetItem(
+              text: S.of(context).createPost,
+              icon: const Icon(
                 Icons.border_color_rounded,
                 color: Colors.black87,
                 size: 22,

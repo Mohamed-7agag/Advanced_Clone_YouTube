@@ -1,20 +1,26 @@
-import 'dart:convert';
-import 'package:advanced_youtube/Core/utils/constants.dart';
-import 'package:advanced_youtube/Features/home/data/models/video_model/video_model.dart';
-import 'package:advanced_youtube/Features/profile/presentation/view_model/saved_videos_cubit/saved_videos_cubit.dart';
-import 'package:advanced_youtube/Features/profile/presentation/view_model/video_interactive_cubit/video_interactive_cubit.dart';
-import 'package:advanced_youtube/cache/cache_helper.dart';
+import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:share/share.dart';
+
+import 'package:advanced_youtube/Features/home/data/models/video_model/video_model.dart';
+import 'package:advanced_youtube/Features/profile/presentation/view_model/saved_videos_cubit/saved_videos_cubit.dart';
+import 'package:advanced_youtube/Features/profile/presentation/view_model/video_interactive_cubit/video_interactive_cubit.dart';
+
+import '../../data/models/channel_detail_model/channel_detail_model.dart';
 import 'bottom_sheet_item.dart';
 
-openMoreVertBottomSheet({required context, required VideoModel videoModel}) {
+openMoreVertBottomSheet({
+  required context,
+  required VideoModel videoModel,
+  required ChannelDetailModel channelDetailModel,
+}) {
   showModalBottomSheet(
+    context: context,
     builder: (context) {
-      
       return Container(
-        padding: const EdgeInsets.only(left: 12, top: 15, right: 6, bottom: 15),
+        padding: const EdgeInsetsDirectional.only(
+            start: 14, top: 15, end: 6, bottom: 15),
         height: 270,
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -29,21 +35,21 @@ openMoreVertBottomSheet({required context, required VideoModel videoModel}) {
           children: [
             BlocBuilder<VideoInteractiveCubit, VideoInteractiveState>(
               builder: (context, state) {
-                bool ok = CacheHelper.getStringList(likedVideosKey)
-                    .contains(json.encode(videoModel.toJson()));
+                bool ok = context
+                    .read<VideoInteractiveCubit>()
+                    .isLiked(videoModel: videoModel);
                 return BottomSheetItem(
                   onTap: () {
-                    // if (state is VideoInteractiveLiked) {
-                    //   context.read<VideoInteractiveCubit>().unLiked(
-                    //         videoModel: videoModel,
-                    //       );
-                    // } else {
-                    //   context.read<VideoInteractiveCubit>().liked(
-                    //         videoModel: videoModel,
-                    //       );
-                    // }
+                    context.read<VideoInteractiveCubit>().interavtiveToggle(
+                          videoModel: videoModel,
+                          channelImage: channelDetailModel
+                                  .snippet?.thumbnails?.medium?.url ??
+                              '',
+                        );
                   },
-                  text: ok == true ? "Remove Like" : "Add Like",
+                  text: ok == true
+                      ? S.of(context).removeLike
+                      : S.of(context).like,
                   icon: Icon(
                     ok == true
                         ? Icons.thumb_up_alt_rounded
@@ -56,21 +62,21 @@ openMoreVertBottomSheet({required context, required VideoModel videoModel}) {
             ),
             BlocBuilder<SavedVideosCubit, SavedVideosState>(
               builder: (context, state) {
-                bool ok = CacheHelper.getStringList(savedVideosKey)
-                    .contains(json.encode(videoModel.toJson()));
+                bool ok = context
+                    .read<SavedVideosCubit>()
+                    .isSaved(videoModel: videoModel);
                 return BottomSheetItem(
                   onTap: () {
-                    // if (state is SavedVideosSaved) {
-                    //   context.read<SavedVideosCubit>().unSaved(
-                    //         videoModel: videoModel,
-                    //       );
-                    // } else {
-                    //   context.read<SavedVideosCubit>().saved(
-                    //         videoModel: videoModel,
-                    //       );
-                    // }
+                    context.read<SavedVideosCubit>().savedVideoToggle(
+                          videoModel: videoModel,
+                          channelImage: channelDetailModel
+                                  .snippet?.thumbnails?.medium?.url ??
+                              '',
+                        );
                   },
-                  text: ok == true ? "Remove from saved videos" : "Save Video",
+                  text: ok == true
+                      ? S.of(context).removeVideo
+                      : S.of(context).save,
                   icon: Icon(
                     ok == true
                         ? Icons.library_add_check_rounded
@@ -83,18 +89,18 @@ openMoreVertBottomSheet({required context, required VideoModel videoModel}) {
             ),
             BottomSheetItem(
               onTap: () {
-                Share.share("YouTube Video");
+                Share.share(videoModel.id?.videoId ?? '');
               },
-              text: "Share Video",
+              text: S.of(context).share,
               icon: const Icon(
                 Icons.share,
                 color: Colors.black87,
                 size: 22,
               ),
             ),
-            const BottomSheetItem(
-              text: "Download Video",
-              icon: Icon(
+            BottomSheetItem(
+              text: S.of(context).download,
+              icon: const Icon(
                 Icons.file_download_outlined,
                 color: Colors.black87,
                 size: 22,
@@ -104,6 +110,5 @@ openMoreVertBottomSheet({required context, required VideoModel videoModel}) {
         ),
       );
     },
-    context: context,
   );
 }

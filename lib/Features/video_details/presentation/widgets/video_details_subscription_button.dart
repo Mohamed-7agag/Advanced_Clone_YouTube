@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:advanced_youtube/Core/widgets/custom_button.dart';
+import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,7 +24,7 @@ class VideoDetailsSubscriptionButton extends StatelessWidget {
         bool isSubscribed =
             context.read<SubscriptionCubit>().isSubscribed(channelDetailModel);
         return CustomButton(
-          text: isSubscribed ? "Subscribed" : "Subscribe",
+          text: isSubscribed ? S.of(context).subscribed : S.of(context).subscribe,
           backgroundColor: isSubscribed ? Colors.grey[300]! : Colors.black,
           foregroundColor: isSubscribed ? Colors.black : Colors.white,
           icon: isSubscribed

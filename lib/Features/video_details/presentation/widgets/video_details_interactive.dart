@@ -1,6 +1,6 @@
-
 import 'package:advanced_youtube/Core/widgets/custom_error_widget.dart';
 import 'package:advanced_youtube/Features/home/presentation/view_model/channel_details_cubit/channel_details_cubit.dart';
+import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -114,7 +114,7 @@ class VideoDetailsInteractive extends StatelessWidget {
                                   width: 8.w,
                                 ),
                                 Text(
-                                  ok == true ? "Saved" : "Save",
+                                  ok == true ? S.of(context).remove : S.of(context).save,
                                 ),
                               ],
                             ),
@@ -141,7 +141,7 @@ class VideoDetailsInteractive extends StatelessWidget {
             ),
             child: InkWell(
               onTap: () {
-                Share.share("YouTube Video");
+                Share.share(videoModel.id?.videoId ?? '');
               },
               child: Row(
                 children: [
@@ -152,7 +152,7 @@ class VideoDetailsInteractive extends StatelessWidget {
                   SizedBox(
                     width: 8.w,
                   ),
-                  const Text("Share"),
+                  Text(S.of(context).share),
                 ],
               ),
             ),
@@ -175,7 +175,7 @@ class VideoDetailsInteractive extends StatelessWidget {
                 SizedBox(
                   width: 8.w,
                 ),
-                const Text("Download"),
+                Text(S.of(context).download),
               ],
             ),
           ),

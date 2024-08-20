@@ -41,7 +41,7 @@ class CustomVideoItem extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            padding: const EdgeInsetsDirectional.symmetric(horizontal: 12, vertical: 10),
             child: CustomVideoItemTextSection(
               videoModel: videoModel,
               channelDetailModel: channelDetailModel,

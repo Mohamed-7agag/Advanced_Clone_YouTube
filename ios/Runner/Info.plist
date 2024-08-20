@@ -49,6 +49,12 @@
 	<array>
 		<string>https</string>
 	</array>
+	<key>CFBundleLocalizations</key>
+	<array>
+			<string>en</string>
+			<string>de_DE</string>
+			...
+	</array>
 	<key>NSAppTransportSecurity</key>
 <dict>
     <key>NSAllowsArbitraryLoads</key>

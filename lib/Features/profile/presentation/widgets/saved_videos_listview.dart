@@ -26,7 +26,7 @@ class SavedVideosListView extends StatelessWidget {
                 return SizedBox(
                   width: MediaQuery.sizeOf(context).width * 0.45,
                   child: Padding(
-                    padding: const EdgeInsets.only(right: 10),
+                    padding: const EdgeInsetsDirectional.only(end: 10),
                     child: CustomProfileVideoItem(
                       videoModel: items[0][items[0].length - index - 1],
                       channelImage: items[1][items[1].length - index - 1],

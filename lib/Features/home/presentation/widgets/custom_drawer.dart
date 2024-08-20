@@ -1,5 +1,6 @@
 import 'package:advanced_youtube/Core/widgets/custom_url_launcher.dart';
 import 'package:advanced_youtube/Features/home/presentation/widgets/custom_drawer_item.dart';
+import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,14 +12,14 @@ class CustomDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       backgroundColor: Colors.white,
-      width: MediaQuery.of(context).size.width *0.7,
+      width: MediaQuery.of(context).size.width * 0.7,
       shape: const BeveledRectangleBorder(borderRadius: BorderRadius.zero),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding:
-                const EdgeInsets.only(top: 50, left: 14, right: 5),
+                const EdgeInsetsDirectional.only(top: 50, start: 14, end: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -27,57 +28,62 @@ class CustomDrawer extends StatelessWidget {
                   width: 110,
                 ),
                 SizedBox(height: 40.h),
-                const CustomDrawerItem(
-                  icon: Icon(
+                CustomDrawerItem(
+                  icon: const Icon(
                     Icons.whatshot_outlined,
                     size: 28,
                   ),
-                  text: "Trending",
+                  text: S.of(context).trending,
                 ),
                 SizedBox(height: 25.h),
-                const CustomDrawerItem(
-                  icon: Icon(
+                CustomDrawerItem(
+                  icon: const Icon(
                     Icons.music_note_outlined,
                     size: 28,
                   ),
-                  text: "Music",
+                  text: S.of(context).music,
                 ),
                 SizedBox(height: 25.h),
-                const CustomDrawerItem(
-                  icon: Icon(
+                CustomDrawerItem(
+                  icon: const Icon(
                     Icons.podcasts_rounded,
                     size: 28,
                   ),
-                  text: "Live",
+                  text: S.of(context).live,
                 ),
                 SizedBox(height: 25.h),
-                const CustomDrawerItem(
-                  icon: Icon(
+                CustomDrawerItem(
+                  icon: const Icon(
                     Icons.sports_esports_outlined,
                     size: 28,
                   ),
-                  text: "Gaming",
+                  text: S.of(context).gaming,
                 ),
                 SizedBox(height: 25.h),
-                const CustomDrawerItem(
-                  icon: Icon(
+                CustomDrawerItem(
+                  icon: const Icon(
                     Icons.emoji_events_outlined,
                     size: 28,
                   ),
-                  text: "Sports",
+                  text: S.of(context).sports,
                 ),
               ],
             ),
           ),
-           Divider(thickness: 0.6,height: 60,color: Colors.grey.shade300,),
+          Divider(
+            thickness: 0.6,
+            height: 60,
+            color: Colors.grey.shade300,
+          ),
           Padding(
             padding:
-                const EdgeInsets.only(bottom: 12, left: 14, right: 5),
+                const EdgeInsetsDirectional.only(bottom: 12, start: 14, end: 5),
             child: Column(
               children: [
                 CustomDrawerItem(
                   onPressed: () {
-                    customUrlLauncher(context, "https://www.youtube.com/premium/");
+                    customUrlLauncher(
+                        context, "https://www.youtube.com/premium/");
                   },
                   icon: SvgPicture.asset(
                     'assets/images/youtube.svg',

@@ -2,6 +2,8 @@
 
 import 'package:advanced_youtube/Core/utils/styles.dart';
 import 'package:advanced_youtube/Features/search/presentation/view_model/cubit/search_video_cubit.dart';
+import 'package:advanced_youtube/generated/l10n.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,14 +20,14 @@ class CustomTextField extends StatelessWidget {
       controller: search,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-        hintText: "Search",
+        hintText: S.of(context).search,
         suffixIcon: IconButton(
           onPressed: () {
             BlocProvider.of<SearchVideoCubit>(context)
                 .getSearchedVideos(text: search.text.toString());
           },
           icon: const Icon(
-            Icons.search,
+            CupertinoIcons.search,
             color: Colors.red,
           ),
         ),

@@ -1,4 +1,3 @@
-import 'package:advanced_youtube/Core/utils/local_data.dart';
 import 'package:advanced_youtube/Core/utils/styles.dart';
 import 'package:advanced_youtube/Features/home/presentation/view_model/all_videos_cubit/all_videos_cubit.dart';
 import 'package:advanced_youtube/Features/home/presentation/view_model/tabs_cubit.dart';
@@ -6,10 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomBottomTabItem extends StatelessWidget {
-  const CustomBottomTabItem(
-      {super.key, required this.isSelected, required this.index});
+  const CustomBottomTabItem({
+    super.key,
+    required this.isSelected,
+    required this.index,
+    required this.recommendation,
+  });
   final bool isSelected;
   final int index;
+  final List<String> recommendation;
   @override
   Widget build(BuildContext context) {
     return Container(

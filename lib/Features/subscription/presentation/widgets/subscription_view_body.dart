@@ -1,3 +1,4 @@
+import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,7 +19,7 @@ class SubscriptionViewBody extends StatelessWidget {
         children: [
           SizedBox(height: 15.h),
           Text(
-            "Your Subscriptions",
+            S.of(context).yourSubscriptions,
             style: Styles.textStyle20,
           ),
           Divider(

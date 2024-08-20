@@ -8,11 +8,10 @@ enum TabsItems {
   food,
   sports,
   movies,
-  gadgets,
   entertainment,
   math,
   live,
-  podcast
+  podcast,
 }
 
 class TabsCubit extends Cubit<TabsItems> {

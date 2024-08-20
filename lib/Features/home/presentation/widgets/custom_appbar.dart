@@ -1,4 +1,5 @@
 import 'package:advanced_youtube/Core/utils/app_router.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,7 +22,7 @@ class CustomAppBar extends StatelessWidget {
       backgroundColor: Colors.white,
       leadingWidth: 110,
       leading: Padding(
-        padding: const EdgeInsets.only(left: 12),
+        padding: const EdgeInsetsDirectional.only(start: 14),
         child: Image.asset(
           "assets/images/ytlogo.png",
         ),
@@ -33,16 +34,18 @@ class CustomAppBar extends StatelessWidget {
             Icons.cast,
           ),
         ),
+        SizedBox(width: 8.w),
         const Icon(
           Icons.notifications_none_outlined,
           size: 26,
         ),
+        SizedBox(width: 8.w),
         IconButton(
           onPressed: () {
             Navigator.pushNamed(context, AppRouter.searchViewRoute);
           },
           icon: const Icon(
-            Icons.search_rounded,
+            CupertinoIcons.search,
             size: 25,
           ),
         ),

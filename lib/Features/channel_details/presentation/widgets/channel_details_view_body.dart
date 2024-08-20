@@ -2,6 +2,7 @@ import 'package:advanced_youtube/Core/utils/styles.dart';
 import 'package:advanced_youtube/Core/widgets/custom_button.dart';
 import 'package:advanced_youtube/Features/home/data/models/channel_detail_model/channel_detail_model.dart';
 import 'package:advanced_youtube/Features/video_details/presentation/widgets/helper.dart';
+import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -79,7 +80,7 @@ class ChannelDetailsViewBody extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "${refactNumber(channelDetailModel.statistics!.subscriberCount)} Subscribers  .  ",
+                        "${refactNumber(channelDetailModel.statistics!.subscriberCount)} ${S.of(context).subscriber}  .  ",
                         style: Styles.textStyle13,
                       ),
                       Text(
@@ -104,7 +105,7 @@ class ChannelDetailsViewBody extends StatelessWidget {
             builder: (context, state) {
               bool ok = context.read<SubscriptionCubit>().isSubscribed(channelDetailModel);
               return CustomButton(
-                text: ok == true ? "Subscribed" : "Subscribe",
+                text: ok == true ? S.of(context).subscribed : S.of(context).subscribe,
                 backgroundColor: ok == true ? Colors.grey[300]! : Colors.black,
                 foregroundColor: ok == true ? Colors.black : Colors.white,
                 icon: ok == true
@@ -126,7 +127,7 @@ class ChannelDetailsViewBody extends StatelessWidget {
           ),
           SizedBox(height: 20.h),
           Text(
-            "Popular Videos",
+            S.of(context).popularVideos,
             style: Styles.textStyle18,
           ),
           SizedBox(height: 12.h),

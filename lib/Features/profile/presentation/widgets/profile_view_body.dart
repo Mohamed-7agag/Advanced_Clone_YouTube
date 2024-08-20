@@ -14,7 +14,7 @@ class ProfileViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 14),
+      padding: const EdgeInsetsDirectional.only(start: 14),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +29,7 @@ class ProfileViewBody extends StatelessWidget {
             const ProfileSavedVideos(),
             Divider(color: kGrey300, thickness: 0.4, height: 26),
             const ProfileLikedVideos(),
-            Divider(color: kGrey300, thickness: 0.4, height: 26),
+            Divider(color: kGrey300, thickness: 0.4, height: 36),
             const ProfileProperties(),
           ],
         ),

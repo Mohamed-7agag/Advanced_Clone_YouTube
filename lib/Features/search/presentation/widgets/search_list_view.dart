@@ -2,6 +2,7 @@ import 'package:advanced_youtube/Core/utils/styles.dart';
 import 'package:advanced_youtube/Core/widgets/custom_error_widget.dart';
 import 'package:advanced_youtube/Features/channel_details/presentation/widgets/channel_details_video_item.dart';
 import 'package:advanced_youtube/Features/search/presentation/view_model/cubit/search_video_cubit.dart';
+import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,7 +17,7 @@ class SearchListView extends StatelessWidget {
           return state.searchedVideos.isEmpty
               ? Center(
                   child: Text(
-                    "No Videos Found!",
+                    S.of(context).noVideosFound,
                     style: Styles.textStyle20
                         .copyWith(fontWeight: FontWeight.w400),
                   ),
@@ -44,8 +45,8 @@ class SearchListView extends StatelessWidget {
         }
         return Center(
           child: Text(
-            "Search For Videos",
-            style: Styles.textStyle20.copyWith(fontWeight: FontWeight.w400),
+            S.of(context).searchForVideos,
+            style: Styles.textStyle16,
           ),
         );
       },

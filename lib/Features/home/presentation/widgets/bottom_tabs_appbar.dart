@@ -11,20 +11,22 @@ class BottomTabsAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TabsCubit, TabsItems>(
       builder: (context, state) {
+        List<String> recommendation = recommendationList(context);
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: recommendation.asMap().entries.map((e) {
               return Padding(
-                padding: EdgeInsets.only(
-                  left: 10,
+                padding: EdgeInsetsDirectional.only(
+                  start: e.key == 0 ? 14 : 8,
                   bottom: 8,
                   top: 8,
-                  right: e.key == recommendation.length - 1 ? 14 : 0,
+                  end: e.key == recommendation.length - 1 ? 14 : 0,
                 ),
                 child: CustomBottomTabItem(
                   index: e.key,
                   isSelected: e.key == state.index,
+                  recommendation: recommendation,
                 ),
               );
             }).toList(),

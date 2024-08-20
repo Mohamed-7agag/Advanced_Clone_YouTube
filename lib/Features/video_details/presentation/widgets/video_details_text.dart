@@ -1,3 +1,4 @@
+import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -25,7 +26,7 @@ class VideoDetailsText extends StatelessWidget {
         Row(
           children: [
             Text(
-              "${refactNumber(videoStatisticsModel.statistics!.viewCount)} Views .",
+              "${refactNumber(videoStatisticsModel.statistics!.viewCount)} ${S.of(context).views} .",
               style: Styles.textStyle13,
             ),
             SizedBox(width: 10.w),

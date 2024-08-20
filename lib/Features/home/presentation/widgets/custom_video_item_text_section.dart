@@ -8,7 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomVideoItemTextSection extends StatelessWidget {
-  const CustomVideoItemTextSection({super.key, required this.videoModel, required this.channelDetailModel,});
+  const CustomVideoItemTextSection({
+    super.key,
+    required this.videoModel,
+    required this.channelDetailModel,
+  });
   final VideoModel videoModel;
   final ChannelDetailModel channelDetailModel;
   @override
@@ -85,7 +89,11 @@ class CustomVideoItemTextSection extends StatelessWidget {
         const SizedBox(width: 10),
         InkWell(
           onTap: () {
-            openMoreVertBottomSheet(context: context, videoModel: videoModel);
+            openMoreVertBottomSheet(
+              context: context,
+              videoModel: videoModel,
+              channelDetailModel: channelDetailModel,
+            );
           },
           child: const Icon(
             Icons.more_vert,

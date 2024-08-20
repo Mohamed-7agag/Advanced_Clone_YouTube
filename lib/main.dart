@@ -1,3 +1,4 @@
+import 'package:advanced_youtube/bottom_appbar_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +10,9 @@ import 'package:advanced_youtube/cache/cache_helper.dart';
 
 import 'Features/profile/presentation/view_model/saved_videos_cubit/saved_videos_cubit.dart';
 import 'Features/profile/presentation/view_model/video_interactive_cubit/video_interactive_cubit.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'generated/l10n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +30,9 @@ void main() async {
         BlocProvider(
           create: (context) => SubscriptionCubit(),
         ),
+        BlocProvider(
+          create: (context) => LocalizationCubit(),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -42,19 +49,31 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
-          theme: ThemeData(
-            scaffoldBackgroundColor: Colors.white,
-          ),
-          onGenerateRoute: AppRouter.generateRoute,
-          initialRoute: AppRouter.splashViewRoute,
-          debugShowCheckedModeBanner: false,
-          builder: (context, child) {
-            return MediaQuery(
-              data: MediaQuery.of(context).copyWith(
-                textScaler: const TextScaler.linear(1.0),
+        return BlocBuilder<LocalizationCubit, String>(
+          builder: (context, state) {
+            return MaterialApp(
+              locale:  Locale(state),
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: S.delegate.supportedLocales,
+              theme: ThemeData(
+                scaffoldBackgroundColor: Colors.white,
               ),
-              child: child!,
+              onGenerateRoute: AppRouter.generateRoute,
+              initialRoute: AppRouter.splashViewRoute,
+              debugShowCheckedModeBanner: false,
+              builder: (context, child) {
+                return MediaQuery(
+                  data: MediaQuery.of(context).copyWith(
+                    textScaler: const TextScaler.linear(1.0),
+                  ),
+                  child: child!,
+                );
+              },
             );
           },
         );
