@@ -24,7 +24,7 @@ openBottomSheet(context) {
               children: [
                 Text(
                   S.of(context).create,
-                  style: Styles.textStyle22,
+                  style: Styles.textStyle20,
                 ),
                 IconButton(
                     onPressed: () {
@@ -33,7 +33,7 @@ openBottomSheet(context) {
                     icon: const Icon(
                       Icons.close_rounded,
                       size: 30,
-                      color: Colors.black,
+                      color: Colors.black87,
                     )),
               ],
             ),

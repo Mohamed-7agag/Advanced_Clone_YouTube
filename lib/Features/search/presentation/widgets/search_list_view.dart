@@ -18,8 +18,7 @@ class SearchListView extends StatelessWidget {
               ? Center(
                   child: Text(
                     S.of(context).noVideosFound,
-                    style: Styles.textStyle20
-                        .copyWith(fontWeight: FontWeight.w400),
+                    style: Styles.textStyle16,
                   ),
                 )
               : ListView.builder(

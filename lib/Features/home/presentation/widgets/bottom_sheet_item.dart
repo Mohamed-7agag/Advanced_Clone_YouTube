@@ -23,7 +23,7 @@ class BottomSheetItem extends StatelessWidget {
           const SizedBox(width: 16),
           Text(
             text,
-            style: Styles.textStyle18,
+            style: Styles.textStyle16,
           ),
         ],
       ),

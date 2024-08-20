@@ -21,14 +21,18 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 20),
         hintText: S.of(context).search,
-        suffixIcon: IconButton(
-          onPressed: () {
-            BlocProvider.of<SearchVideoCubit>(context)
-                .getSearchedVideos(text: search.text.toString());
-          },
-          icon: const Icon(
-            CupertinoIcons.search,
-            color: Colors.red,
+        hintStyle: Styles.textStyle15,
+        suffixIcon: Padding(
+          padding: const EdgeInsetsDirectional.only(end: 8),
+          child: IconButton(
+            onPressed: () {
+              BlocProvider.of<SearchVideoCubit>(context)
+                  .getSearchedVideos(text: search.text.toString());
+            },
+            icon: const Icon(
+              CupertinoIcons.search,
+              color: Colors.red,
+            ),
           ),
         ),
         enabledBorder: outlinedInputBorder(),

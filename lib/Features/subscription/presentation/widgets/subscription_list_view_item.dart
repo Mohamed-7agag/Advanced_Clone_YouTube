@@ -1,3 +1,4 @@
+import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -49,7 +50,7 @@ class SubscriptionListViewItem extends StatelessWidget {
       ),
       subtitle: Expanded(
         child: Text(
-          "${refactNumber(channelDetailModel.statistics!.subscriberCount)} Subscriber",
+          "${refactNumber(channelDetailModel.statistics!.subscriberCount)} ${S.of(context).subscriber}",
           style: Styles.textStyle12,
         ),
       ),

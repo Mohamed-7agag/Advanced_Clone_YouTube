@@ -21,7 +21,7 @@ class ProfilePropertyItem extends StatelessWidget {
           SizedBox(width: 12.w),
           Text(
             title,
-            style: Styles.textStyle16,
+            style: Styles.textStyle15,
           ),
         ],
       ),

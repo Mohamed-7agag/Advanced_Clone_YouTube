@@ -10,14 +10,14 @@ class ProfileListTile extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       title: Text(
         "Mohamed Hagag",
-        style: Styles.textStyle22,
+        style: Styles.textStyle18,
       ),
       subtitle: Text(
         "mh169824@gmail.com",
-        style: Styles.textStyle14,
+        style: Styles.textStyle12,
       ),
       leading: CircleAvatar(
-        radius: 30,
+        radius: 27,
         backgroundColor: Colors.grey[200],
         backgroundImage: const AssetImage('assets/images/me.jpg'),
       ),

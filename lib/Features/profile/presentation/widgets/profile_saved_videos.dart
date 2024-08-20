@@ -13,7 +13,7 @@ class ProfileSavedVideos extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          S.of(context).likedVideos,
+          S.of(context).savedVideos,
           style: Styles.textStyle16,
         ),
         SizedBox(height: 12.h),

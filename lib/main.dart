@@ -7,6 +7,7 @@ import 'package:advanced_youtube/Core/utils/app_router.dart';
 import 'package:advanced_youtube/Core/utils/service_locator.dart';
 import 'package:advanced_youtube/Features/subscription/presentation/view_model/subscription_cubit/subscriptions_cubit.dart';
 import 'package:advanced_youtube/cache/cache_helper.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'Features/profile/presentation/view_model/saved_videos_cubit/saved_videos_cubit.dart';
 import 'Features/profile/presentation/view_model/video_interactive_cubit/video_interactive_cubit.dart';
@@ -52,7 +53,7 @@ class MyApp extends StatelessWidget {
         return BlocBuilder<LocalizationCubit, String>(
           builder: (context, state) {
             return MaterialApp(
-              locale:  Locale(state),
+              locale: Locale(state),
               localizationsDelegates: const [
                 S.delegate,
                 GlobalMaterialLocalizations.delegate,
@@ -60,7 +61,14 @@ class MyApp extends StatelessWidget {
                 GlobalCupertinoLocalizations.delegate,
               ],
               supportedLocales: S.delegate.supportedLocales,
-              theme: ThemeData(
+              theme: ThemeData.light().copyWith(
+                textTheme: state == 'ar'
+                    ? GoogleFonts.tajawalTextTheme(
+                        ThemeData.light().textTheme,
+                      )
+                    : GoogleFonts.openSansTextTheme(
+                        ThemeData.light().textTheme,
+                      ),
                 scaffoldBackgroundColor: Colors.white,
               ),
               onGenerateRoute: AppRouter.generateRoute,

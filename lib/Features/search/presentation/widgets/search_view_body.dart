@@ -19,10 +19,10 @@ class SearchViewBody extends StatelessWidget {
           CustomTextField(),
           const SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsetsDirectional.only(start: 6),
+            padding: const EdgeInsetsDirectional.only(start: 4),
             child: Text(
               S.of(context).searchResult,
-              style: Styles.textStyle18.copyWith(fontSize: 16),
+              style: Styles.textStyle14,
             ),
           ),
           const SizedBox(height: 20),

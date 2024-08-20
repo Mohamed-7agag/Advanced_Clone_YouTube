@@ -20,7 +20,7 @@ class SubscriptionViewBody extends StatelessWidget {
           SizedBox(height: 15.h),
           Text(
             S.of(context).yourSubscriptions,
-            style: Styles.textStyle20,
+            style: Styles.textStyle18,
           ),
           Divider(
             thickness: 1,
