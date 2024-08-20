@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +15,9 @@ class LikedVideosListView extends StatelessWidget {
     return BlocBuilder<VideoInteractiveCubit, VideoInteractiveState>(
       builder: (context, state) {
         List<dynamic> items =
-            context.read<VideoInteractiveCubit>().getLikedVideos();
+            context.read<VideoInteractiveCubit>().getAllLikedVideos();
+            log(items[0].length.toString());
+            log(items[1].length.toString());
         return SizedBox(
           height: 160.h,
           child: Expanded(

@@ -7,6 +7,10 @@ sealed class VideoInteractiveState extends Equatable {
   List<Object> get props => [];
 }
 
-final class VideoInteractiveLiked extends VideoInteractiveState {}
-final class VideoInteractiveUnliked extends VideoInteractiveState {}
-final class VideoInteractiveGetList extends VideoInteractiveState {}
+final class VideoInteractiveInitial extends VideoInteractiveState {}
+
+final class VideoInteractiveIsLikedDone extends VideoInteractiveState {}
+
+final class VideoInteractiveToggle extends VideoInteractiveState {}
+
+final class VideoInteractiveListUpdate extends VideoInteractiveState {}

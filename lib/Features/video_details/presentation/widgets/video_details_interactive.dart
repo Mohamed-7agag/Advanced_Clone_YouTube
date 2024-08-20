@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:advanced_youtube/Core/widgets/custom_error_widget.dart';
 import 'package:advanced_youtube/Features/home/presentation/view_model/channel_details_cubit/channel_details_cubit.dart';
@@ -7,11 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:share/share.dart';
 
-import 'package:advanced_youtube/Core/utils/constants.dart';
 import 'package:advanced_youtube/Features/home/data/models/video_model/video_model.dart';
 import 'package:advanced_youtube/Features/profile/presentation/view_model/saved_videos_cubit/saved_videos_cubit.dart';
 import 'package:advanced_youtube/Features/profile/presentation/view_model/video_interactive_cubit/video_interactive_cubit.dart';
-import 'package:advanced_youtube/cache/cache_helper.dart';
 
 import '../../data/models/video_statistics_model/video_statistics_model.dart';
 import 'helper.dart';
@@ -47,23 +44,19 @@ class VideoDetailsInteractive extends StatelessWidget {
                       child: BlocBuilder<VideoInteractiveCubit,
                           VideoInteractiveState>(
                         builder: (context, state) {
-                          bool ok = CacheHelper.getStringList(likedVideosKey)
-                              .contains(json.encode(videoModel.toJson()));
+                          bool ok = context
+                              .read<VideoInteractiveCubit>()
+                              .isLiked(videoModel: videoModel);
                           return InkWell(
                             onTap: () {
-                              if (state is VideoInteractiveLiked) {
-                                context.read<VideoInteractiveCubit>().unLiked(
+                              context
+                                  .read<VideoInteractiveCubit>()
+                                  .interavtiveToggle(
                                     videoModel: videoModel,
                                     channelImage: channelState.channelDetails
                                             .snippet?.thumbnails?.medium?.url ??
-                                        '');
-                              } else {
-                                context.read<VideoInteractiveCubit>().liked(
-                                    videoModel: videoModel,
-                                    channelImage: channelState.channelDetails
-                                            .snippet?.thumbnails?.medium?.url ??
-                                        '');
-                              }
+                                        '',
+                                  );
                             },
                             child: Row(
                               children: [
@@ -97,23 +90,17 @@ class VideoDetailsInteractive extends StatelessWidget {
                       ),
                       child: BlocBuilder<SavedVideosCubit, SavedVideosState>(
                         builder: (context, state) {
-                          bool ok = CacheHelper.getStringList(savedVideosKey)
-                              .contains(json.encode(videoModel.toJson()));
+                          bool ok = context
+                              .read<SavedVideosCubit>()
+                              .isSaved(videoModel: videoModel);
                           return InkWell(
                             onTap: () {
-                              if (state is SavedVideosSaved) {
-                                context.read<SavedVideosCubit>().unSaved(
+                              context.read<SavedVideosCubit>().savedVideoToggle(
                                     videoModel: videoModel,
                                     channelImage: channelState.channelDetails
                                             .snippet?.thumbnails?.medium?.url ??
-                                        '');
-                              } else {
-                                context.read<SavedVideosCubit>().saved(
-                                    videoModel: videoModel,
-                                    channelImage: channelState.channelDetails
-                                            .snippet?.thumbnails?.medium?.url ??
-                                        '');
-                              }
+                                        '',
+                                  );
                             },
                             child: Row(
                               children: [

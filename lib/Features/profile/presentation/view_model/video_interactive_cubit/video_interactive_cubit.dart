@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:advanced_youtube/Core/utils/constants.dart';
 import 'package:advanced_youtube/Features/home/data/models/video_model/video_model.dart';
 import 'package:advanced_youtube/cache/cache_helper.dart';
@@ -7,57 +8,45 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'video_interactive_state.dart';
 
 class VideoInteractiveCubit extends Cubit<VideoInteractiveState> {
-  VideoInteractiveCubit() : super(VideoInteractiveUnliked());
+  VideoInteractiveCubit() : super(VideoInteractiveInitial());
 
-  List<String> likedVideos = [];
   List<String> savedChannelImages = [];
 
-  void liked({required VideoModel videoModel, required String channelImage}) {
+  void interavtiveToggle(
+      {required VideoModel videoModel, required String channelImage}) {
     String videoModelStr = json.encode(videoModel.toJson());
     List<String> savedList = CacheHelper.getStringList(likedVideosKey);
     if (!savedList.contains(videoModelStr)) {
       savedList.add(videoModelStr);
       savedChannelImages.add(channelImage);
-
-      likedVideos = savedList;
-      CacheHelper.setData(key: likedVideosKey, value: likedVideos);
-      CacheHelper.setData(key: channelImageKey, value: savedChannelImages);
-
-      emit(VideoInteractiveLiked());
     } else {
-      String channelDetailModelStr = json.encode(videoModel.toJson());
-      List<String> savedList = CacheHelper.getStringList(likedVideosKey);
-      savedList.remove(channelDetailModelStr);
+      savedList.remove(videoModelStr);
       savedChannelImages.remove(channelImage);
-      likedVideos = savedList;
-      CacheHelper.setData(key: likedVideosKey, value: likedVideos);
-      CacheHelper.setData(key: channelImageKey, value: savedChannelImages);
-
-      emit(VideoInteractiveUnliked());
     }
+    log("liked videos length is ${savedList.length.toString()}");
+    log("liked videos images length is ${savedChannelImages.length.toString()}");
+    CacheHelper.setData(key: likedVideosKey, value: savedList);
+    CacheHelper.setData(key: channelImageKey, value: savedChannelImages);
+    emit(VideoInteractiveToggle());
   }
 
-  void unLiked({required VideoModel videoModel, required String channelImage}) {
+  bool isLiked({required VideoModel videoModel}) {
     String channelDetailModelStr = json.encode(videoModel.toJson());
     List<String> savedList = CacheHelper.getStringList(likedVideosKey);
-    savedList.remove(channelDetailModelStr);
-    savedChannelImages.remove(channelImage);
-    likedVideos = savedList;
-    CacheHelper.setData(key: likedVideosKey, value: likedVideos);
-    CacheHelper.setData(key: channelImageKey, value: savedChannelImages);
-    emit(VideoInteractiveUnliked());
+    emit(VideoInteractiveIsLikedDone());
+    return savedList.contains(channelDetailModelStr);
   }
 
-  List<dynamic> getLikedVideos() {
+  List<dynamic> getAllLikedVideos() {
     List<String> savedList = CacheHelper.getStringList(likedVideosKey);
     List<String> savedChannelImages =
         CacheHelper.getStringList(channelImageKey);
 
-    List<VideoModel> videos = [];
-    for (var element in savedList) {
-      videos.add(VideoModel.fromJson(json.decode(element)));
-    }
-    emit(VideoInteractiveGetList());
+    List<VideoModel> videos = savedList.map((item) {
+      return VideoModel.fromJson(json.decode(item));
+    }).toList();
+
+    emit(VideoInteractiveListUpdate());
     return [videos, savedChannelImages];
   }
 }

@@ -10,14 +10,15 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      width: MediaQuery.of(context).size.width / 1.5,
+      backgroundColor: Colors.white,
+      width: MediaQuery.of(context).size.width *0.7,
       shape: const BeveledRectangleBorder(borderRadius: BorderRadius.zero),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding:
-                const EdgeInsets.only(top: 45, bottom: 12, left: 14, right: 5),
+                const EdgeInsets.only(top: 50, left: 14, right: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -25,7 +26,7 @@ class CustomDrawer extends StatelessWidget {
                   "assets/images/ytlogo.png",
                   width: 110,
                 ),
-                SizedBox(height: 35.h),
+                SizedBox(height: 40.h),
                 const CustomDrawerItem(
                   icon: Icon(
                     Icons.whatshot_outlined,
@@ -65,15 +66,13 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   text: "Sports",
                 ),
-                SizedBox(height: 20.h),
               ],
             ),
           ),
-          const Divider(thickness: 1),
-          SizedBox(height: 20.h),
+           Divider(thickness: 0.6,height: 60,color: Colors.grey.shade300,),
           Padding(
             padding:
-                const EdgeInsets.only(top: 18, bottom: 12, left: 14, right: 5),
+                const EdgeInsets.only(bottom: 12, left: 14, right: 5),
             child: Column(
               children: [
                 CustomDrawerItem(

@@ -24,7 +24,7 @@ class _VideoDetailsViewBodyState extends State<VideoDetailsViewBody> {
   @override
   void initState() {
     controller = YoutubePlayerController(
-        initialVideoId: widget.videoModel.id!.videoId!,
+        initialVideoId: widget.videoModel.id?.videoId ?? '',
         flags: const YoutubePlayerFlags(
           mute: false,
         ));
@@ -49,7 +49,6 @@ class _VideoDetailsViewBodyState extends State<VideoDetailsViewBody> {
             progressIndicatorColor: Colors.red,
             key: UniqueKey(),
           ),
-          SizedBox(height: 5.h),
           BlocBuilder<VideoStatisticsCubit, VideoStatisticsState>(
             builder: (context, state) {
               if (state is VideoStatisticsSuccess) {
@@ -62,15 +61,15 @@ class _VideoDetailsViewBodyState extends State<VideoDetailsViewBody> {
                         videoModel: widget.videoModel,
                         videoStatisticsModel: state.videoStatistics[0],
                       ),
-                      SizedBox(height: 15.h),
-                      VideoDetailsInteractive(
-                        videoModel: widget.videoModel,
-                          videoStatisticsModel: state.videoStatistics[0]),
-                      SizedBox(height: 15.h),
-                      VideoActionAndComments(
-                        videoModel: widget.videoModel,
-                        videoStatisticsModel: state.videoStatistics[0],
-                      ),
+                      // SizedBox(height: 15.h),
+                      // VideoDetailsInteractive(
+                      //   videoModel: widget.videoModel,
+                      //     videoStatisticsModel: state.videoStatistics[0]),
+                      // SizedBox(height: 15.h),
+                      // VideoActionAndComments(
+                      //   videoModel: widget.videoModel,
+                      //   videoStatisticsModel: state.videoStatistics[0],
+                      // ),
                     ],
                   ),
                 );

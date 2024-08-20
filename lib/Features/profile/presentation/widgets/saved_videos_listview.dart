@@ -13,7 +13,7 @@ class SavedVideosListView extends StatelessWidget {
     return BlocBuilder<SavedVideosCubit, SavedVideosState>(
       builder: (context, state) {
         List<dynamic> items =
-            context.read<SavedVideosCubit>().getsavedVideos();
+            context.read<SavedVideosCubit>().getAllsavedVideos();
         return SizedBox(
           height: 160.h,
           child: Expanded(
@@ -24,12 +24,12 @@ class SavedVideosListView extends StatelessWidget {
               itemCount: items[0].length,
               itemBuilder: (BuildContext context, int index) {
                 return SizedBox(
-                  width:MediaQuery.sizeOf(context).width * 0.45,
+                  width: MediaQuery.sizeOf(context).width * 0.45,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: CustomProfileVideoItem(
-                      videoModel: items[0][items[0].length-index-1],
-                      channelImage: items[1][items[1].length-index-1],
+                      videoModel: items[0][items[0].length - index - 1],
+                      channelImage: items[1][items[1].length - index - 1],
                     ),
                   ),
                 );

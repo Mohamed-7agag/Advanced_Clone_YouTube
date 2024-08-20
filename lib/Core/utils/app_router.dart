@@ -12,8 +12,6 @@ import 'package:advanced_youtube/Features/home/presentation/view_model/channel_d
 import 'package:advanced_youtube/Features/home/presentation/view_model/tabs_cubit.dart';
 import 'package:advanced_youtube/Features/home/presentation/views/home_view.dart';
 import 'package:advanced_youtube/Features/home/presentation/views/shorts_videos_view.dart';
-import 'package:advanced_youtube/Features/profile/presentation/view_model/saved_videos_cubit/saved_videos_cubit.dart';
-import 'package:advanced_youtube/Features/profile/presentation/view_model/video_interactive_cubit/video_interactive_cubit.dart';
 import 'package:advanced_youtube/Features/profile/presentation/views/profile_view.dart';
 import 'package:advanced_youtube/Features/search/data/repos/search_repo_implement.dart';
 import 'package:advanced_youtube/Features/search/presentation/view_model/cubit/search_video_cubit.dart';
@@ -24,7 +22,6 @@ import 'package:advanced_youtube/custom_bottom_appbar.dart';
 
 import '../../Features/home/data/models/channel_detail_model/channel_detail_model.dart';
 import '../../Features/splash/presentation/views/splash_view.dart';
-import '../../Features/subscription/presentation/view_model/subscription_cubit/subscriptions_cubit.dart';
 import '../../Features/video_details/data/repos/video_statistics_repo_implement.dart';
 import '../../Features/video_details/presentation/view_model/video_details_cubit/video_statistics_cubit.dart';
 import '../../Features/video_details/presentation/views/video_details_view.dart';
@@ -92,14 +89,16 @@ class AppRouter {
             providers: [
               BlocProvider(
                 create: (_) => VideoStatisticsCubit(
-                    getIt.get<VideoStatisticsRepoImplement>()),
+                    getIt.get<VideoStatisticsRepoImplement>())
+                  ..getVideoStatistics(videoId: args.id?.videoId ?? ''),
               ),
               // BlocProvider(create: (_) => SubscriptionCubit()),
               // BlocProvider(create: (_) => VideoInteractiveCubit()),
               // BlocProvider(create: (_) => SavedVideosCubit()),
               BlocProvider(
-                create: (_) =>
-                    ChannelDetailsCubit(getIt.get<HomeRepoImplement>()),
+                create: (_) => ChannelDetailsCubit(
+                    getIt.get<HomeRepoImplement>())
+                  ..getChannelDetails(channelId: args.snippet?.channelId ?? ''),
               ),
             ],
             child: VideoDetailsView(videoModel: args),

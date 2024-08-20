@@ -1,3 +1,4 @@
+import 'package:advanced_youtube/Core/utils/styles.dart';
 import 'package:advanced_youtube/Features/home/presentation/widgets/bottom_sheet_item.dart';
 import 'package:flutter/material.dart';
 
@@ -5,7 +6,7 @@ openBottomSheet(context) {
   showModalBottomSheet(
     builder: (context) {
       return Container(
-        padding: const EdgeInsets.only(left: 12, top: 8, right: 6, bottom: 20),
+        padding: const EdgeInsets.only(left: 14, top: 8, right: 8, bottom: 20),
         height: 320,
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -19,9 +20,9 @@ openBottomSheet(context) {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                 Text(
                   "Create",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                  style: Styles.textStyle22,
                 ),
                 IconButton(
                     onPressed: () {

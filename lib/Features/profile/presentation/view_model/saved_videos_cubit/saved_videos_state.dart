@@ -7,6 +7,10 @@ sealed class SavedVideosState extends Equatable {
   List<Object> get props => [];
 }
 
-final class SavedVideosSaved extends SavedVideosState {}
-final class SavedVideosUnsaved extends SavedVideosState {}
-final class SavedVideosGetList extends SavedVideosState {}
+final class SavedVideosInitial extends SavedVideosState {}
+
+final class SavedVideosIsSavedDone extends SavedVideosState {}
+
+final class SavedVideosToggle extends SavedVideosState {}
+
+final class SavedVideosListUpdate extends SavedVideosState {}

@@ -18,13 +18,13 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => VideoInteractiveCubit()..getLikedVideos(),
+          create: (context) => VideoInteractiveCubit(),
         ),
         BlocProvider(
-          create: (context) => SavedVideosCubit()..getsavedVideos(),
+          create: (context) => SavedVideosCubit(),
         ),
         BlocProvider(
-          create: (context) => SubscriptionCubit()..getAllSubscribedChannels(),
+          create: (context) => SubscriptionCubit(),
         ),
       ],
       child: const MyApp(),
