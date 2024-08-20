@@ -26,6 +26,7 @@ class CustomBottomAppBar extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: Colors.white,
             selectedLabelStyle: Styles.textStyle11,
             showUnselectedLabels: false,
             fixedColor: Colors.black,

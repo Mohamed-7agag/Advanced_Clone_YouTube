@@ -12,42 +12,51 @@ class SavedVideosCubit extends Cubit<SavedVideosState> {
   SavedVideosCubit() : super(SavedVideosUnsaved());
 
   List<String> savedVideos = [];
+  List<String> savedChannelImages = [];
 
-  void saved({required VideoModel videoModel}) {
+  void saved({required VideoModel videoModel,required String channelImage}) {
     String videoModelStr = json.encode(videoModel.toJson());
-    List<String> savedList = CacheHelper.getStringList(key: savedVideosKey);
+    List<String> savedList = CacheHelper.getStringList( savedVideosKey);
     if (!savedList.contains(videoModelStr)) {
       savedList.add(videoModelStr);
+      savedChannelImages.add(channelImage);
       savedVideos = savedList;
       CacheHelper.setData(key: savedVideosKey, value: savedVideos);
+      CacheHelper.setData(key: channelImageKey, value: savedChannelImages);
       emit(SavedVideosSaved());
     } else {
       String channelDetailModelStr = json.encode(videoModel.toJson());
-      List<String> savedList = CacheHelper.getStringList(key: savedVideosKey);
+      List<String> savedList = CacheHelper.getStringList(savedVideosKey);
       savedList.remove(channelDetailModelStr);
+       savedChannelImages.remove(channelImage);
       savedVideos = savedList;
       CacheHelper.setData(key: savedVideosKey, value: savedVideos);
+      CacheHelper.setData(key: channelImageKey, value: savedChannelImages);
       emit(SavedVideosUnsaved());
     }
   }
 
-  void unSaved({required VideoModel videoModel}) {
+  void unSaved({required VideoModel videoModel,required String channelImage}) {
     String channelDetailModelStr = json.encode(videoModel.toJson());
-    List<String> savedList = CacheHelper.getStringList(key: savedVideosKey);
+    List<String> savedList = CacheHelper.getStringList(savedVideosKey);
     savedList.remove(channelDetailModelStr);
+    savedChannelImages.remove(channelImage);
     savedVideos = savedList;
     CacheHelper.setData(key: savedVideosKey, value: savedVideos);
+    CacheHelper.setData(key: channelImageKey, value: savedChannelImages);
     emit(SavedVideosUnsaved());
   }
 
-  List<VideoModel> getsavedVideos() {
-    List<String> savedList = CacheHelper.getStringList(key: savedVideosKey);
+  List<dynamic> getsavedVideos() {
+    List<String> savedList = CacheHelper.getStringList(savedVideosKey);
+    List<String> savedChannelImages = CacheHelper.getStringList(channelImageKey);
+    
 
     List<VideoModel> videos = [];
     for (var element in savedList) {
       videos.add(VideoModel.fromJson(json.decode(element)));
     }
     emit(SavedVideosGetList());
-    return videos;
+    return [videos,savedChannelImages];
   }
 }

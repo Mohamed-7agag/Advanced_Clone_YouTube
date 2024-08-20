@@ -29,19 +29,19 @@ openMoreVertBottomSheet({required context, required VideoModel videoModel}) {
           children: [
             BlocBuilder<VideoInteractiveCubit, VideoInteractiveState>(
               builder: (context, state) {
-                bool ok = CacheHelper.getStringList(key: likedVideosKey)
+                bool ok = CacheHelper.getStringList(likedVideosKey)
                     .contains(json.encode(videoModel.toJson()));
                 return BottomSheetItem(
                   onTap: () {
-                    if (state is VideoInteractiveLiked) {
-                      context.read<VideoInteractiveCubit>().unLiked(
-                            videoModel: videoModel,
-                          );
-                    } else {
-                      context.read<VideoInteractiveCubit>().liked(
-                            videoModel: videoModel,
-                          );
-                    }
+                    // if (state is VideoInteractiveLiked) {
+                    //   context.read<VideoInteractiveCubit>().unLiked(
+                    //         videoModel: videoModel,
+                    //       );
+                    // } else {
+                    //   context.read<VideoInteractiveCubit>().liked(
+                    //         videoModel: videoModel,
+                    //       );
+                    // }
                   },
                   text: ok == true ? "Remove Like" : "Add Like",
                   icon: Icon(
@@ -56,19 +56,19 @@ openMoreVertBottomSheet({required context, required VideoModel videoModel}) {
             ),
             BlocBuilder<SavedVideosCubit, SavedVideosState>(
               builder: (context, state) {
-                bool ok = CacheHelper.getStringList(key: savedVideosKey)
+                bool ok = CacheHelper.getStringList(savedVideosKey)
                     .contains(json.encode(videoModel.toJson()));
                 return BottomSheetItem(
                   onTap: () {
-                    if (state is SavedVideosSaved) {
-                      context.read<SavedVideosCubit>().unSaved(
-                            videoModel: videoModel,
-                          );
-                    } else {
-                      context.read<SavedVideosCubit>().saved(
-                            videoModel: videoModel,
-                          );
-                    }
+                    // if (state is SavedVideosSaved) {
+                    //   context.read<SavedVideosCubit>().unSaved(
+                    //         videoModel: videoModel,
+                    //       );
+                    // } else {
+                    //   context.read<SavedVideosCubit>().saved(
+                    //         videoModel: videoModel,
+                    //       );
+                    // }
                   },
                   text: ok == true ? "Remove from saved videos" : "Save Video",
                   icon: Icon(

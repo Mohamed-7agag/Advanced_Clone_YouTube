@@ -64,7 +64,7 @@ class ApiServices extends ApiRequests {
   Future getChannelVideos({required String channelId}) async {
     try {
       final response =
-          await _dio.get("${EndPoint.allVideos}&channelId=$channelId");
+          await _dio.get("${EndPoint.allVideos}medium&channelId=$channelId");
       return response.data;
     } on DioException catch (e) {
       handleDioExceptions(e);

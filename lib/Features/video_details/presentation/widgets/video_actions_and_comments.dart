@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:advanced_youtube/Core/utils/constants.dart';
 import 'package:advanced_youtube/Core/utils/styles.dart';
 import 'package:advanced_youtube/Core/widgets/custom_button.dart';
@@ -11,7 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../Core/utils/app_router.dart';
-import '../../../../cache/cache_helper.dart';
 import '../../../home/data/models/video_model/video_model.dart';
 import '../../../subscription/presentation/view_model/subscription_cubit/subscriptions_cubit.dart';
 import '../../data/models/video_statistics_model/video_statistics_model.dart';
@@ -24,6 +22,7 @@ class VideoActionAndComments extends StatelessWidget {
     required this.videoStatisticsModel,
     required this.videoModel,
   });
+
   final VideoStatisticsModel videoStatisticsModel;
   final VideoModel videoModel;
 
@@ -70,19 +69,16 @@ class VideoActionAndComments extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          videoModel.snippet!.channelTitle!.length <= 25
-                              ? Text(
-                                  "${videoModel.snippet!.channelTitle}",
-                                  style: Styles.textStyle15,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                )
-                              : Text(
-                                  videoModel.snippet!.channelTitle
-                                      .toString()
-                                      .substring(0, 25),
-                                  style: Styles.textStyle15,
-                                ),
+                          Text(
+                            videoModel.snippet!.channelTitle!.length <= 25
+                                ? "${videoModel.snippet!.channelTitle}"
+                                : videoModel.snippet!.channelTitle
+                                    .toString()
+                                    .substring(0, 25),
+                            style: Styles.textStyle15,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                           Text(
                             "${refactNumber(state.channelDetails.statistics!.subscriberCount)} Subscriber",
                             style: Styles.textStyle11,
@@ -93,19 +89,21 @@ class VideoActionAndComments extends StatelessWidget {
                       ),
                     ],
                   ),
-                  BlocBuilder<SubscriptionsCubit, SubscriptionsState>(
-                    builder: (context, state1) {
-                      bool ok = CacheHelper.getStringList(
-                              key: subscribedChannelsKey)
-                          .contains(
-                              json.encode(state.channelDetails.toJson()));
+                  BlocBuilder<SubscriptionCubit, SubscriptionState>(
+                    builder: (context, subscriptionState) {
+                      // bool isSubscribed = context
+                      //     .read<SubscriptionsCubit>()
+                      //     .getSubscribedChannels()
+                      //     .any((channel) =>
+                      //         channel.id == state.channelDetails.id);
+                      bool isSubscribed = false;
                       return CustomButton(
-                        text: ok == true ? "Subscribed" : "Subscribe",
+                        text: isSubscribed ? "Subscribed" : "Subscribe",
                         backgroundColor:
-                            ok == true ? Colors.grey[200]! : Colors.black,
+                            isSubscribed ? Colors.grey[200]! : Colors.black,
                         foregroundColor:
-                            ok == true ? Colors.black : Colors.white,
-                        icon: ok == true
+                            isSubscribed ? Colors.black : Colors.white,
+                        icon: isSubscribed
                             ? const Icon(
                                 Icons.done_rounded,
                                 size: 23,
@@ -113,12 +111,16 @@ class VideoActionAndComments extends StatelessWidget {
                               )
                             : const Text(""),
                         onPressed: () {
-                          if (state1 == SubscriptionsState.subscribed) {
-                            context.read<SubscriptionsCubit>().unSubscribed(
+                          if (isSubscribed) {
+                            context
+                                .read<SubscriptionCubit>()
+                                .toggleSubscription(
                                   channelDetailModel: state.channelDetails,
                                 );
                           } else {
-                            context.read<SubscriptionsCubit>().subscribed(
+                            context
+                                .read<SubscriptionCubit>()
+                                .toggleSubscription(
                                   channelDetailModel: state.channelDetails,
                                 );
                           }
@@ -144,7 +146,7 @@ class VideoActionAndComments extends StatelessWidget {
           width: double.infinity,
           height: 85,
           decoration: BoxDecoration(
-            color: Colors.grey[100],
+            color: Colors.grey[200],
             borderRadius: BorderRadius.circular(10),
           ),
           child: Column(
@@ -159,7 +161,7 @@ class VideoActionAndComments extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 17,
-                    backgroundColor: Colors.grey[200],
+                    backgroundColor: Colors.grey[300],
                   ),
                   SizedBox(width: 5.w),
                   Expanded(
@@ -169,7 +171,7 @@ class VideoActionAndComments extends StatelessWidget {
                       height: 22,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
-                        color: Colors.grey[200],
+                        color: Colors.grey[300],
                       ),
                       child: Text(
                         "Add a comment",

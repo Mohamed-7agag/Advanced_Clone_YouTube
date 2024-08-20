@@ -7,12 +7,7 @@ class SubscriptionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(left: 12,right: 12,top: 12),
-          child: SubscriptionViewBody(),
-        ),
-      ),
+      body: SafeArea(child: SubscriptionViewBody()),
     );
   }
 }

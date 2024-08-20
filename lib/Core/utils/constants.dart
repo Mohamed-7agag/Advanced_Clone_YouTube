@@ -6,3 +6,5 @@ Color kGrey300 = Colors.grey.shade300;
 const String subscribedChannelsKey = 'subscribedChannels';
 const String likedVideosKey = 'likedVideos';
 const String savedVideosKey = 'savedVideos';
+const String channelImageKey = 'channelImageKey';
+

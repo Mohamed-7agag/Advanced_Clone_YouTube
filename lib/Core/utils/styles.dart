@@ -5,6 +5,9 @@ abstract class Styles {
   static final textStyle11 = TextStyle(
     fontSize: 11.sp,
   );
+  static final textStyle9 = TextStyle(
+    fontSize: 9.sp,
+  );
   static final textStyle13 = TextStyle(
     fontSize: 13.sp,
   );
@@ -32,6 +35,10 @@ abstract class Styles {
   );
   static final textStyle24 = TextStyle(
     fontSize: 24.sp,
+    fontWeight: FontWeight.w400,
+  );
+  static final textStyle22 = TextStyle(
+    fontSize: 22.sp,
     fontWeight: FontWeight.w400,
   );
 }

@@ -10,42 +10,54 @@ class VideoInteractiveCubit extends Cubit<VideoInteractiveState> {
   VideoInteractiveCubit() : super(VideoInteractiveUnliked());
 
   List<String> likedVideos = [];
+  List<String> savedChannelImages = [];
 
-  void liked({required VideoModel videoModel}) {
+  void liked({required VideoModel videoModel, required String channelImage}) {
     String videoModelStr = json.encode(videoModel.toJson());
-    List<String> savedList = CacheHelper.getStringList(key: likedVideosKey);
+    List<String> savedList = CacheHelper.getStringList(likedVideosKey);
     if (!savedList.contains(videoModelStr)) {
       savedList.add(videoModelStr);
+      savedChannelImages.add(channelImage);
+
       likedVideos = savedList;
       CacheHelper.setData(key: likedVideosKey, value: likedVideos);
+      CacheHelper.setData(key: channelImageKey, value: savedChannelImages);
+
       emit(VideoInteractiveLiked());
     } else {
       String channelDetailModelStr = json.encode(videoModel.toJson());
-      List<String> savedList = CacheHelper.getStringList(key: likedVideosKey);
+      List<String> savedList = CacheHelper.getStringList(likedVideosKey);
       savedList.remove(channelDetailModelStr);
+      savedChannelImages.remove(channelImage);
       likedVideos = savedList;
       CacheHelper.setData(key: likedVideosKey, value: likedVideos);
+      CacheHelper.setData(key: channelImageKey, value: savedChannelImages);
+
       emit(VideoInteractiveUnliked());
     }
   }
 
-  void unLiked({required VideoModel videoModel}) {
+  void unLiked({required VideoModel videoModel, required String channelImage}) {
     String channelDetailModelStr = json.encode(videoModel.toJson());
-    List<String> savedList = CacheHelper.getStringList(key: likedVideosKey);
+    List<String> savedList = CacheHelper.getStringList(likedVideosKey);
     savedList.remove(channelDetailModelStr);
+    savedChannelImages.remove(channelImage);
     likedVideos = savedList;
     CacheHelper.setData(key: likedVideosKey, value: likedVideos);
+    CacheHelper.setData(key: channelImageKey, value: savedChannelImages);
     emit(VideoInteractiveUnliked());
   }
 
-  List<VideoModel> getLikedVideos() {
-    List<String> savedList = CacheHelper.getStringList(key: likedVideosKey);
+  List<dynamic> getLikedVideos() {
+    List<String> savedList = CacheHelper.getStringList(likedVideosKey);
+    List<String> savedChannelImages =
+        CacheHelper.getStringList(channelImageKey);
 
     List<VideoModel> videos = [];
     for (var element in savedList) {
       videos.add(VideoModel.fromJson(json.decode(element)));
     }
     emit(VideoInteractiveGetList());
-    return videos;
+    return [videos, savedChannelImages];
   }
 }

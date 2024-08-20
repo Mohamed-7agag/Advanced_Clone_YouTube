@@ -13,42 +13,25 @@ class ChannelDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: channelDetailModel.snippet!.title!.length <= 20
-            ? Text(
-                channelDetailModel.snippet!.title!,
-                style: Styles.textStyle15,
-              )
-            : Text(
-                channelDetailModel.snippet!.title!.toString().substring(0, 20),
-                style: Styles.textStyle15,
-              ),
+        backgroundColor: Colors.white,
+        
+        titleSpacing: 0,
+        title: Expanded(
+          child: Text(
+            channelDetailModel.snippet!.title!.toString(),
+            style: Styles.textStyle15,
+          ),
+        ),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.cast,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              //showSearch(context: context, delegate: DataSearch());
-            },
-            icon: const Icon(
-              Icons.search_rounded,
-              size: 25,
-            ),
-          ),
           const Icon(
             Icons.more_vert,
             size: 26,
           ),
-          SizedBox(width: 10.w),
+          SizedBox(width: 14.w),
         ],
       ),
-      body: SafeArea(
-        child: ChannelDetailsViewBody(
-          channelDetailModel: channelDetailModel,
-        ),
+      body: ChannelDetailsViewBody(
+        channelDetailModel: channelDetailModel,
       ),
     );
   }

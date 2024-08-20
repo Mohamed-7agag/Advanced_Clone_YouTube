@@ -30,9 +30,7 @@ class _VideoDetailsViewState extends State<VideoDetailsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: VideoDetailsViewBody(
-          videoModel: widget.videoModel,
-        ),
+        child: VideoDetailsViewBody(videoModel: widget.videoModel),
       ),
     );
   }

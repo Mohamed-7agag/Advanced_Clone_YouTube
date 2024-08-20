@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:advanced_youtube/Features/home/data/repos/home_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -10,10 +8,10 @@ class AllVideosCubit extends Cubit<AllVideosState> {
 
   final HomeRepo homeRepo;
 
-  Future<void> getAllVideos(String? q,String videoType) async {
+  Future<void> getAllVideos(String? q, String videoType) async {
     emit(AllVideosLoading());
 
-    var result = await homeRepo.getAllVideos(q,videoType);
+    var result = await homeRepo.getAllVideos(q, videoType);
 
     result.fold(
       (exception) {
@@ -35,12 +33,10 @@ class AllVideosCubit extends Cubit<AllVideosState> {
                 'video': video,
                 'channelDetails': channelDetails,
               });
-              log(video.toString());
-              log(channelDetails.toString());
             });
           }
         }
-        
+
         emit(
           AllVideosSuccess(videosWithChannelDetails: videosWithChannelDetails),
         );

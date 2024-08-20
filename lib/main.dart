@@ -1,28 +1,35 @@
-import 'package:advanced_youtube/Core/utils/app_router.dart';
-import 'package:advanced_youtube/Core/utils/service_locator.dart';
-import 'package:advanced_youtube/cache/cache_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'package:advanced_youtube/Core/utils/app_router.dart';
+import 'package:advanced_youtube/Core/utils/service_locator.dart';
+import 'package:advanced_youtube/Features/subscription/presentation/view_model/subscription_cubit/subscriptions_cubit.dart';
+import 'package:advanced_youtube/cache/cache_helper.dart';
+
 import 'Features/profile/presentation/view_model/saved_videos_cubit/saved_videos_cubit.dart';
 import 'Features/profile/presentation/view_model/video_interactive_cubit/video_interactive_cubit.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  CacheHelper.init();
+  await CacheHelper.init();
   setUp();
-  runApp(MultiBlocProvider(
-    providers: [
-      BlocProvider(
-        create: (context) => VideoInteractiveCubit()..getLikedVideos(),
-      ),
-      BlocProvider(
-        create: (context) => SavedVideosCubit()..getsavedVideos(),
-      ),
-    ],
-    child: const MyApp(),
-  ));
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => VideoInteractiveCubit()..getLikedVideos(),
+        ),
+        BlocProvider(
+          create: (context) => SavedVideosCubit()..getsavedVideos(),
+        ),
+        BlocProvider(
+          create: (context) => SubscriptionCubit()..getAllSubscribedChannels(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -36,7 +43,9 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
-          theme: ThemeData(),
+          theme: ThemeData(
+            scaffoldBackgroundColor: Colors.white,
+          ),
           onGenerateRoute: AppRouter.generateRoute,
           initialRoute: AppRouter.splashViewRoute,
           debugShowCheckedModeBanner: false,

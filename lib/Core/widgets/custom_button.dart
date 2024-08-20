@@ -24,7 +24,7 @@ class CustomButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         shadowColor: Colors.transparent,
         fixedSize: width != null ? Size.fromWidth(width!) : null,
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+        
         backgroundColor: backgroundColor,
         foregroundColor: foregroundColor,
       ),
