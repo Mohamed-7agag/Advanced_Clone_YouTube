@@ -70,6 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trending": MessageLookupByLibrary.simpleMessage("Trending"),
         "unsubscribe": MessageLookupByLibrary.simpleMessage("Unsubscribe"),
         "uploadVideo": MessageLookupByLibrary.simpleMessage("Upload Video"),
+        "video": MessageLookupByLibrary.simpleMessage("Video"),
         "viewChannel": MessageLookupByLibrary.simpleMessage("View Channel"),
         "views": MessageLookupByLibrary.simpleMessage("Views"),
         "you": MessageLookupByLibrary.simpleMessage("You"),

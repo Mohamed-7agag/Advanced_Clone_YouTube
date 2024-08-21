@@ -14,7 +14,6 @@ class ChannelDetailsView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        
         titleSpacing: 0,
         title: Expanded(
           child: Text(
@@ -30,9 +29,7 @@ class ChannelDetailsView extends StatelessWidget {
           SizedBox(width: 14.w),
         ],
       ),
-      body: ChannelDetailsViewBody(
-        channelDetailModel: channelDetailModel,
-      ),
+      body: ChannelDetailsViewBody(channelDetailModel: channelDetailModel),
     );
   }
 }

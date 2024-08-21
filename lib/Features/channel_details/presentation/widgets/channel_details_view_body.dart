@@ -16,30 +16,14 @@ class ChannelDetailsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: CachedNetworkImage(
-              imageUrl:
-                  "${channelDetailModel.snippet!.thumbnails!.medium!.url}",
-              width: double.infinity,
-              height: 100.h,
-              fit: BoxFit.fill,
-              errorWidget: (context, url, error) {
-                return Icon(
-                  Icons.error_outline_rounded,
-                  size: 40,
-                  color: Colors.grey[400],
-                );
-              },
-            ),
-          ),
-          SizedBox(height: 25.h),
-          Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Image.asset('assets/images/banner.png'),
+        SizedBox(height: 15.h),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               ClipRRect(
@@ -69,8 +53,7 @@ class ChannelDetailsViewBody extends StatelessWidget {
                           style: Styles.textStyle20,
                         )
                       : Text(
-                          channelDetailModel.snippet!.title!
-                              .substring(0, 25),
+                          channelDetailModel.snippet!.title!.substring(0, 25),
                           style: Styles.textStyle20,
                         ),
                   Text(
@@ -84,7 +67,7 @@ class ChannelDetailsViewBody extends StatelessWidget {
                         style: Styles.textStyle13,
                       ),
                       Text(
-                        "${refactNumber(channelDetailModel.statistics!.videoCount)} Video",
+                        "${refactNumber(channelDetailModel.statistics!.videoCount)} ${S.of(context).video}",
                         style: Styles.textStyle13,
                       ),
                     ],
@@ -93,49 +76,50 @@ class ChannelDetailsViewBody extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 25.h),
-          Text(
+        ),
+        SizedBox(height: 25.h),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14),
+          child: Text(
             "${channelDetailModel.snippet!.description}",
             style: Styles.textStyle14,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
-          SizedBox(height: 25.h),
-          BlocBuilder<SubscriptionCubit, SubscriptionState>(
+        ),
+        SizedBox(height: 25.h),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14),
+          child: BlocBuilder<SubscriptionCubit, SubscriptionState>(
             builder: (context, state) {
-              bool ok = context.read<SubscriptionCubit>().isSubscribed(channelDetailModel);
+              bool ok = context
+                  .read<SubscriptionCubit>()
+                  .isSubscribed(channelDetailModel);
               return CustomButton(
-                text: ok == true ? S.of(context).subscribed : S.of(context).subscribe,
-                backgroundColor: ok == true ? Colors.grey[300]! : Colors.black,
-                foregroundColor: ok == true ? Colors.black : Colors.white,
-                icon: ok == true
-                    ? const Icon(
-                        Icons.done_rounded,
-                        size: 23,
-                        color: Colors.green,
-                      )
-                    : const Text(""),
-                width: MediaQuery.of(context).size.width,
+                ok: ok,
+                width: MediaQuery.sizeOf(context).width,
+                textStyle: Styles.textStyle15,
                 onPressed: () {
                   context.read<SubscriptionCubit>().toggleSubscription(
-                    channelDetailModel: channelDetailModel,
-                  );
-                  
+                        channelDetailModel: channelDetailModel,
+                      );
                 },
               );
             },
           ),
-          SizedBox(height: 20.h),
-          Text(
+        ),
+        SizedBox(height: 20.h),
+        Padding(
+padding: const EdgeInsets.symmetric(horizontal: 14),          child: Text(
             S.of(context).popularVideos,
             style: Styles.textStyle18,
           ),
-          SizedBox(height: 12.h),
-          const Expanded(
-            child: ChannelDetailsListView(),
-          ),
-        ],
-      ),
+        ),
+        SizedBox(height: 12.h),
+        const Expanded(
+          child: ChannelDetailsListView(),
+        ),
+      ],
     );
   }
 }

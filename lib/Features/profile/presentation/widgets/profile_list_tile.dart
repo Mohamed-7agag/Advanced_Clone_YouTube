@@ -17,7 +17,7 @@ class ProfileListTile extends StatelessWidget {
         style: Styles.textStyle12,
       ),
       leading: CircleAvatar(
-        radius: 27,
+        radius: 26,
         backgroundColor: Colors.grey[200],
         backgroundImage: const AssetImage('assets/images/me.jpg'),
       ),

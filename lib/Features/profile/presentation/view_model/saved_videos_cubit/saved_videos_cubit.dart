@@ -48,7 +48,7 @@ class SavedVideosCubit extends Cubit<SavedVideosState> {
       return VideoModel.fromJson(json.decode(item));
     }).toList();
 
-    emit(SavedVideosListUpdate());
+    //emit(SavedVideosListUpdate());
     return [videos, savedChannelImages];
   }
 }

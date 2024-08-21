@@ -21,7 +21,7 @@ class VideoActionAndComments extends StatelessWidget {
     return Column(
       children: [
         VideoDetailsChannelDataSection(videoModel: videoModel),
-        SizedBox(height: 15.h),
+        SizedBox(height: 25.h),
         VideoDetailsCommentsSection(videoStatisticsModel: videoStatisticsModel),
       ],
     );

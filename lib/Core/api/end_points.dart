@@ -1,6 +1,6 @@
 class EndPoint {
   static String baseUrl = "https://youtube.googleapis.com/youtube/v3/"; 
-  static String key = "AIzaSyAN0szfhHm-n-rpy58DRtLMCKiHm2i32Ks"; 
+  static String key = "AIzaSyCnfypfybsZA_F8JXD63biAlCmXCNx5dX0"; 
   static String allVideos =
       "search?key=$key&part=snippet&maxResults=20&type=video&videoDuration=";
   static String allSpecificVideos =

@@ -11,12 +11,12 @@ import '../../data/models/channel_detail_model/channel_detail_model.dart';
 import 'bottom_sheet_item.dart';
 
 openMoreVertBottomSheet({
-  required context,
+  required ctx,
   required VideoModel videoModel,
   required ChannelDetailModel channelDetailModel,
 }) {
   showModalBottomSheet(
-    context: context,
+    context: ctx,
     builder: (context) {
       return Container(
         padding: const EdgeInsetsDirectional.only(

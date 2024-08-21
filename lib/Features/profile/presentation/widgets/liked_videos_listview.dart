@@ -16,8 +16,8 @@ class LikedVideosListView extends StatelessWidget {
       builder: (context, state) {
         List<dynamic> items =
             context.read<VideoInteractiveCubit>().getAllLikedVideos();
-            log(items[0].length.toString());
-            log(items[1].length.toString());
+            log("items[0] length " + items[0].length.toString());
+            log("items[1] length " +items[1].length.toString());
         return SizedBox(
           height: 160.h,
           child: Expanded(

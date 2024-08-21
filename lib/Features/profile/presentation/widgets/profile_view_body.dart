@@ -7,7 +7,6 @@ import 'package:advanced_youtube/Features/profile/presentation/widgets/profile_l
 import 'package:advanced_youtube/Features/profile/presentation/widgets/profile_properties.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class ProfileViewBody extends StatelessWidget {
   const ProfileViewBody({super.key});
 
@@ -19,13 +18,9 @@ class ProfileViewBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 16.h),
+            SizedBox(height: 10.h),
             const ProfileListTile(),
-            Divider(
-              color: kGrey300,
-              thickness: 0.4,
-              height: 26,
-            ),
+            Divider(color: kGrey300, thickness: 0.4, height: 26),
             const ProfileSavedVideos(),
             Divider(color: kGrey300, thickness: 0.4, height: 26),
             const ProfileLikedVideos(),

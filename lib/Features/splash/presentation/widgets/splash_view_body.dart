@@ -15,7 +15,7 @@ class SplashViewBody extends StatefulWidget {
 class _SplashViewBodyState extends State<SplashViewBody> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(milliseconds: 1500), () {
       if (context.mounted) {
         Navigator.pushReplacementNamed(
             context, AppRouter.customBottomAppBarRoute);
@@ -29,7 +29,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     return Center(
       child: SvgPicture.asset(
         'assets/images/youtube.svg',
-        width: 130.w,
+        width: 125.w,
       ),
     );
   }

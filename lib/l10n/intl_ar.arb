@@ -46,5 +46,6 @@
   "views": "مشاهدة",
   "remove": "حذف",
   "popularVideos": "الفيديوهات الشائعة",
-  "subscriptionCancelled": "تم الغاء الاشتراك"
+  "subscriptionCancelled": "تم الغاء الاشتراك",
+  "video" : "فيديو"
 }

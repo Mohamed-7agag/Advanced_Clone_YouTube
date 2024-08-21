@@ -53,7 +53,7 @@ class _VideoDetailsViewBodyState extends State<VideoDetailsViewBody> {
             builder: (context, state) {
               if (state is VideoStatisticsSuccess) {
                 return Padding(
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsetsDirectional.only(start: 14,end: 14,top: 8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -61,15 +61,15 @@ class _VideoDetailsViewBodyState extends State<VideoDetailsViewBody> {
                         videoModel: widget.videoModel,
                         videoStatisticsModel: state.videoStatistics[0],
                       ),
-                      // SizedBox(height: 15.h),
-                      // VideoDetailsInteractive(
-                      //   videoModel: widget.videoModel,
-                      //     videoStatisticsModel: state.videoStatistics[0]),
-                      // SizedBox(height: 15.h),
-                      // VideoActionAndComments(
-                      //   videoModel: widget.videoModel,
-                      //   videoStatisticsModel: state.videoStatistics[0],
-                      // ),
+                      SizedBox(height: 30.h),
+                      VideoDetailsInteractive(
+                        videoModel: widget.videoModel,
+                          videoStatisticsModel: state.videoStatistics[0]),
+                      SizedBox(height: 25.h),
+                      VideoActionAndComments(
+                        videoModel: widget.videoModel,
+                        videoStatisticsModel: state.videoStatistics[0],
+                      ),
                     ],
                   ),
                 );

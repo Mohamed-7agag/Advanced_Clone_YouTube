@@ -1,21 +1,18 @@
+import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton(
-      {super.key,
-      required this.text,
-      this.width,
-      required this.onPressed,
-      required this.backgroundColor,
-      required this.foregroundColor,
-      this.icon});
-  final String text;
-  final double? width;
+  const CustomButton({
+    super.key,
+    this.textStyle,
+    required this.onPressed,
+    this.width,
+    required this.ok,
+  });
+  final TextStyle? textStyle;
   final VoidCallback onPressed;
-  final Color backgroundColor;
-  final Color foregroundColor;
-  final Widget? icon;
+  final double? width;
+  final bool ok;
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +21,13 @@ class CustomButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         shadowColor: Colors.transparent,
         fixedSize: width != null ? Size.fromWidth(width!) : null,
-        
-        backgroundColor: backgroundColor,
-        foregroundColor: foregroundColor,
+        padding: const EdgeInsets.symmetric(horizontal: 18),
+        backgroundColor: ok == true ? const Color(0xffEB3C04) : Colors.black,
+        foregroundColor: Colors.white,
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            text,
-          ),
-          SizedBox(width: 5.w),
-          icon ?? const Text(""),
-        ],
+      child: Text(
+        ok == true ? S.of(context).subscribed : S.of(context).subscribe,
+        style: textStyle,
       ),
     );
   }

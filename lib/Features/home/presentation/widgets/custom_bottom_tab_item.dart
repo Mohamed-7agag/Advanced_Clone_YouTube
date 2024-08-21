@@ -34,7 +34,7 @@ class CustomBottomTabItem extends StatelessWidget {
           : GestureDetector(
               onTap: () {
                 BlocProvider.of<AllVideosCubit>(context)
-                    .getAllVideos(recommendation[index - 1], 'medium');
+                    .getAllVideos(TabsItems.values[index].name, 'medium');
                 BlocProvider.of<TabsCubit>(context)
                     .updateTabsItem(TabsItems.values[index]);
               },

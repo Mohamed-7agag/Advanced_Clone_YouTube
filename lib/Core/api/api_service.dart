@@ -25,7 +25,7 @@ class ApiServices extends ApiRequests {
   Future getAllVideos(String? q, String videoType) async {
     try {
       String endpoints = "";
-      if (q == null || q == "All") {
+      if (q == null || q == "all") {
         endpoints = EndPoint.allVideos + videoType;
       } else {
         endpoints = "${EndPoint.allVideos}$videoType&q=$q";

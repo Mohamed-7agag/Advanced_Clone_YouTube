@@ -90,7 +90,7 @@ class CustomVideoItemTextSection extends StatelessWidget {
         InkWell(
           onTap: () {
             openMoreVertBottomSheet(
-              context: context,
+              ctx: context,
               videoModel: videoModel,
               channelDetailModel: channelDetailModel,
             );

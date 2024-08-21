@@ -12,7 +12,8 @@ class ChannelDetailsListView extends StatelessWidget {
     return BlocBuilder<ChannelVideosCubit, ChannelVideosState>(
       builder: (context, state) {
         if (state is ChannelVideosSuccess) {
-          return Expanded(
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14),
             child: ListView.builder(
               itemCount: state.videos.length,
               itemBuilder: (BuildContext context, int index) {

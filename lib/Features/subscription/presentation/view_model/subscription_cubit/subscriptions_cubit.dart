@@ -17,7 +17,7 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
       return ChannelDetailModel.fromJson(json.decode(item));
     }).toList();
   log('Get all subscription');
-    emit(SubscriptionUpdate());
+    //emit(SubscriptionUpdate());
     return subscribedChannels;
   }
 

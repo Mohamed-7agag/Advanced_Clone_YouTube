@@ -14,7 +14,7 @@ class VideoDetailsCommentsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       width: double.infinity,
       height: 85,
       decoration: BoxDecoration(
@@ -24,9 +24,18 @@ class VideoDetailsCommentsSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "${S.of(context).comment}  ${videoStatisticsModel.statistics!.commentCount ?? 0}",
-            style: Styles.textStyle14,
+          Row(
+            children: [
+              Text(
+                "${videoStatisticsModel.statistics!.commentCount ?? 0}",
+                style: Styles.textStyle12,
+              ),
+              SizedBox(width: 5.w),
+              Text(
+                S.of(context).comment,
+                style: Styles.textStyle12,
+              ),
+            ],
           ),
           SizedBox(height: 10.h),
           Row(
@@ -38,16 +47,15 @@ class VideoDetailsCommentsSection extends StatelessWidget {
               SizedBox(width: 5.w),
               Expanded(
                 child: Container(
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsetsDirectional.only(start: 10),
-                  height: 22,
+                  
+                  padding: const EdgeInsetsDirectional.only(start: 10,top: 2,bottom: 2),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
                     color: Colors.grey[300],
                   ),
                   child: Text(
                     S.of(context).addComment,
-                    style: Styles.textStyle12,
+                    style: Styles.textStyle11,
                   ),
                 ),
               )

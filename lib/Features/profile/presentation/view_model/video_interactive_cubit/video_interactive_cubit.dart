@@ -46,7 +46,7 @@ class VideoInteractiveCubit extends Cubit<VideoInteractiveState> {
       return VideoModel.fromJson(json.decode(item));
     }).toList();
 
-    emit(VideoInteractiveListUpdate());
+    //emit(VideoInteractiveListUpdate());
     return [videos, savedChannelImages];
   }
 }

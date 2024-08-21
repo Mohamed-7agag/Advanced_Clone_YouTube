@@ -74,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trending": MessageLookupByLibrary.simpleMessage("الشائع"),
         "unsubscribe": MessageLookupByLibrary.simpleMessage("إلغاء الاشتراك"),
         "uploadVideo": MessageLookupByLibrary.simpleMessage("رفع فيديو"),
+        "video": MessageLookupByLibrary.simpleMessage("فيديو"),
         "viewChannel": MessageLookupByLibrary.simpleMessage("عرض القناة"),
         "views": MessageLookupByLibrary.simpleMessage("مشاهدة"),
         "you": MessageLookupByLibrary.simpleMessage("أنت"),
