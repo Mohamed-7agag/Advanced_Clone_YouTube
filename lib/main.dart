@@ -1,24 +1,29 @@
-import 'package:advanced_youtube/Features/bottom_navigation_bar/bottom_appbar_cubit.dart';
+import 'package:advanced_youtube/Core/helper/system_overlay_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:advanced_youtube/Core/utils/app_router.dart';
 import 'package:advanced_youtube/Core/utils/service_locator.dart';
+import 'package:advanced_youtube/Features/bottom_navigation_bar/bottom_appbar_cubit.dart';
 import 'package:advanced_youtube/Features/subscription/presentation/view_model/subscription_cubit/subscriptions_cubit.dart';
 import 'package:advanced_youtube/cache/cache_helper.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'Features/profile/presentation/view_model/saved_videos_cubit/saved_videos_cubit.dart';
 import 'Features/profile/presentation/view_model/video_interactive_cubit/video_interactive_cubit.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-
 import 'generated/l10n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   setUp();
+
+// Set the system UI overlay style
+  systemOverlayStyle();
+
   runApp(
     MultiBlocProvider(
       providers: [
