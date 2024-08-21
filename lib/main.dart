@@ -1,4 +1,4 @@
-import 'package:advanced_youtube/bottom_appbar_cubit.dart';
+import 'package:advanced_youtube/Features/bottom_navigation_bar/bottom_appbar_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
               supportedLocales: S.delegate.supportedLocales,
               theme: ThemeData.light().copyWith(
                 textTheme: state == 'ar'
-                    ? GoogleFonts.tajawalTextTheme(
+                    ? GoogleFonts.cairoTextTheme(
                         ThemeData.light().textTheme,
                       )
                     : GoogleFonts.openSansTextTheme(

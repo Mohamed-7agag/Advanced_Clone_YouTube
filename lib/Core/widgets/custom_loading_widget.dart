@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'shimmer_effect.dart';
+import 'shimmer_effects/video_item_shimmer_effect.dart';
 
 class CustomLoadingWidget extends StatelessWidget {
   const CustomLoadingWidget({super.key});
@@ -14,7 +14,7 @@ class CustomLoadingWidget extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             itemCount: 3,
             itemBuilder: (BuildContext context, int index) {
-              return const ShimmerEffect();
+              return const VideoItemShimmerEffect();
             },
           ),
         ),

@@ -1,5 +1,5 @@
 import 'package:advanced_youtube/Core/widgets/custom_error_widget.dart';
-import 'package:advanced_youtube/Core/widgets/shimmer_effect.dart';
+import 'package:advanced_youtube/Core/widgets/shimmer_effects/video_item_shimmer_effect.dart';
 import 'package:advanced_youtube/Features/home/presentation/view_model/all_videos_cubit/all_videos_cubit.dart';
 import 'package:advanced_youtube/Features/home/presentation/widgets/custom_appbar.dart';
 import 'package:advanced_youtube/Features/home/presentation/widgets/custom_video_item.dart';
@@ -39,7 +39,7 @@ class HomeScrollableContent extends StatelessWidget {
             shrinkWrap: true,
             itemCount: 3,
             itemBuilder: (BuildContext context, int index) {
-              return const ShimmerEffect();
+              return const VideoItemShimmerEffect();
             },
           );
         },

@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:advanced_youtube/Core/utils/constants.dart';
 import 'package:advanced_youtube/Features/home/data/models/video_model/video_model.dart';
 import 'package:advanced_youtube/cache/cache_helper.dart';
@@ -25,10 +23,8 @@ class SavedVideosCubit extends Cubit<SavedVideosState> {
       savedList.remove(videoModelStr);
       savedChannelImages.remove(channelImage);
     }
-    log("saved videos length is ${savedList.length.toString()}");
-    log("saved videos images length is ${savedChannelImages.length.toString()}");
     CacheHelper.setData(key: savedVideosKey, value: savedList);
-    CacheHelper.setData(key: channelImageKey, value: savedChannelImages);
+    CacheHelper.setData(key: savedVideosChannelImageKey, value: savedChannelImages);
     emit(SavedVideosToggle());
   }
 
@@ -42,7 +38,7 @@ class SavedVideosCubit extends Cubit<SavedVideosState> {
   List<dynamic> getAllsavedVideos() {
     List<String> savedList = CacheHelper.getStringList(savedVideosKey);
     List<String> savedChannelImages =
-        CacheHelper.getStringList(channelImageKey);
+        CacheHelper.getStringList(savedVideosChannelImageKey);
 
     List<VideoModel> videos = savedList.map((item) {
       return VideoModel.fromJson(json.decode(item));

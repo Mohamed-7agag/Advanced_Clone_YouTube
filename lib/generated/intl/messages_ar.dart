@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchResult": MessageLookupByLibrary.simpleMessage("نتائج البحث"),
         "setting": MessageLookupByLibrary.simpleMessage("الإعدادات"),
         "share": MessageLookupByLibrary.simpleMessage("مشاركة"),
+        "somethingWrong": MessageLookupByLibrary.simpleMessage("حدث خطأ ما"),
         "sports": MessageLookupByLibrary.simpleMessage("الرياضة"),
         "subscribe": MessageLookupByLibrary.simpleMessage("اشترك"),
         "subscribed": MessageLookupByLibrary.simpleMessage("مشترك"),

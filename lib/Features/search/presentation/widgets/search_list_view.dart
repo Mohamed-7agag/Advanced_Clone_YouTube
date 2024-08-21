@@ -6,6 +6,8 @@ import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../Core/widgets/shimmer_effects/channel_details_popular_videos_shimmer.dart';
+
 class SearchListView extends StatelessWidget {
   const SearchListView({super.key});
 
@@ -36,11 +38,7 @@ class SearchListView extends StatelessWidget {
         } else if (state is SearchVideoFailure) {
           return const CustomErrorWidget();
         } else if (state is SearchVideoLoading) {
-          return const Center(
-            child: CircularProgressIndicator(
-              color: Colors.red,
-            ),
-          );
+          return const ChannelDetailsPopularVideosShimmer(itemCount: 10);
         }
         return Center(
           child: Text(

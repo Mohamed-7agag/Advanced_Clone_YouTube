@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:advanced_youtube/Core/utils/constants.dart';
 import 'package:advanced_youtube/Features/home/data/models/channel_detail_model/channel_detail_model.dart';
 import 'package:advanced_youtube/cache/cache_helper.dart';
@@ -16,7 +15,6 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
     List<ChannelDetailModel> subscribedChannels = savedList.map((item) {
       return ChannelDetailModel.fromJson(json.decode(item));
     }).toList();
-  log('Get all subscription');
     //emit(SubscriptionUpdate());
     return subscribedChannels;
   }
@@ -24,7 +22,6 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
   bool isSubscribed(ChannelDetailModel channelDetailModel) {
     List<String> favList = CacheHelper.getStringList(subscribedChannelsKey);
     String channelDetailModelStr = json.encode(channelDetailModel.toJson());
-    log('isSubscribed subscription');
     emit(SubscriptionIsSubscribedDone());
     return favList.contains(channelDetailModelStr);
   }
@@ -32,7 +29,6 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
   void toggleSubscription({required ChannelDetailModel channelDetailModel}) {
     String channelDetailModelStr = json.encode(channelDetailModel.toJson());
     List<String> savedList = CacheHelper.getStringList(subscribedChannelsKey);
-    log('toggle subscription');
     if (savedList.contains(channelDetailModelStr)) {
       savedList.remove(channelDetailModelStr);
     } else {

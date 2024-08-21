@@ -17,8 +17,8 @@ import 'package:advanced_youtube/Features/search/data/repos/search_repo_implemen
 import 'package:advanced_youtube/Features/search/presentation/view_model/cubit/search_video_cubit.dart';
 import 'package:advanced_youtube/Features/search/presentation/views/search_view.dart';
 import 'package:advanced_youtube/Features/subscription/presentation/views/subscription_view.dart';
-import 'package:advanced_youtube/bottom_appbar_cubit.dart';
-import 'package:advanced_youtube/custom_bottom_appbar.dart';
+import 'package:advanced_youtube/Features/bottom_navigation_bar/bottom_appbar_cubit.dart';
+import 'package:advanced_youtube/Features/bottom_navigation_bar/custom_bottom_appbar.dart';
 
 import '../../Features/home/data/models/channel_detail_model/channel_detail_model.dart';
 import '../../Features/splash/presentation/views/splash_view.dart';

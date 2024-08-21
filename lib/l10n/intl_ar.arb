@@ -47,5 +47,6 @@
   "remove": "حذف",
   "popularVideos": "الفيديوهات الشائعة",
   "subscriptionCancelled": "تم الغاء الاشتراك",
-  "video" : "فيديو"
+  "video" : "فيديو",
+  "somethingWrong" : "حدث خطأ ما"
 }

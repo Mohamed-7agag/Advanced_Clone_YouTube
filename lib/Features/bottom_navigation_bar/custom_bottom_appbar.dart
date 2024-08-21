@@ -2,13 +2,14 @@
 import 'package:advanced_youtube/Core/utils/styles.dart';
 import 'package:advanced_youtube/Features/profile/presentation/views/profile_view.dart';
 import 'package:advanced_youtube/Features/subscription/presentation/views/subscription_view.dart';
-import 'package:advanced_youtube/bottom_appbar_cubit.dart';
+import 'package:advanced_youtube/Features/bottom_navigation_bar/bottom_appbar_cubit.dart';
+import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'Features/home/presentation/views/home_view.dart';
-import 'Features/home/presentation/views/shorts_videos_view.dart';
-import 'Features/home/presentation/widgets/plus_bottomsheet.dart';
+import '../home/presentation/views/home_view.dart';
+import '../home/presentation/views/shorts_videos_view.dart';
+import 'plus_bottomsheet.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
   CustomBottomAppBar({super.key});
@@ -48,13 +49,13 @@ class CustomBottomAppBar extends StatelessWidget {
                 icon: state.index == 0
                     ? const Icon(Icons.home_rounded)
                     : const Icon(Icons.home_outlined),
-                label: "Home",
+                label: S.of(context).home,
               ),
               BottomNavigationBarItem(
                 icon: state.index == 1
                     ? SvgPicture.asset("assets/images/bottom_short_on.svg")
                     : SvgPicture.asset("assets/images/bottom_short_off.svg"),
-                label: "Shorts",
+                label: 'Shorts',
               ),
               BottomNavigationBarItem(
                 icon: SvgPicture.asset("assets/images/plus.svg", width: 33),
@@ -64,7 +65,7 @@ class CustomBottomAppBar extends StatelessWidget {
                 icon: state.index == 3
                     ? const Icon(Icons.subscriptions)
                     : const Icon(Icons.subscriptions_outlined),
-                label: "Subscription",
+                label: S.of(context).subscriptions,
               ),
               BottomNavigationBarItem(
                 icon: CircleAvatar(
@@ -72,7 +73,7 @@ class CustomBottomAppBar extends StatelessWidget {
                   backgroundColor: Colors.grey[200],
                   backgroundImage: const AssetImage('assets/images/me.jpg'),
                 ),
-                label: "You",
+                label: S.of(context).you,
               ),
             ],
           ),

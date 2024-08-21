@@ -47,5 +47,6 @@
   "remove": "remove",
   "popularVideos": "Popular Videos",
   "subscriptionCancelled": "Subscription has been Cancelled",
-  "video" : "Video"
+  "video" : "Video",
+  "somethingWrong" : "Something Went Wrong"
 }

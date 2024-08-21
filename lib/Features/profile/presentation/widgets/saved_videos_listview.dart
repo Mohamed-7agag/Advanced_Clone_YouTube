@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,6 +16,8 @@ class SavedVideosListView extends StatelessWidget {
       builder: (context, state) {
         List<dynamic> items =
             context.read<SavedVideosCubit>().getAllsavedVideos();
+        log("saved videos length ${items[0].length}");
+        log("saved images length ${items[1].length}");
         return SizedBox(
           height: 160.h,
           child: Expanded(

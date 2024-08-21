@@ -1,7 +1,7 @@
 import 'package:advanced_youtube/Core/utils/styles.dart';
 import 'package:advanced_youtube/Core/widgets/custom_button.dart';
 import 'package:advanced_youtube/Features/home/data/models/channel_detail_model/channel_detail_model.dart';
-import 'package:advanced_youtube/Features/video_details/presentation/widgets/helper.dart';
+import 'package:advanced_youtube/Core/helper/refactor_number_function.dart';
 import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';

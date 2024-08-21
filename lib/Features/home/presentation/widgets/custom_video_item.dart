@@ -5,7 +5,6 @@ import 'package:advanced_youtube/Features/home/presentation/widgets/custom_video
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-
 class CustomVideoItem extends StatelessWidget {
   const CustomVideoItem({
     super.key,
@@ -41,7 +40,8 @@ class CustomVideoItem extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.symmetric(horizontal: 12, vertical: 10),
+            padding: const EdgeInsetsDirectional.symmetric(
+                horizontal: 12, vertical: 10),
             child: CustomVideoItemTextSection(
               videoModel: videoModel,
               channelDetailModel: channelDetailModel,

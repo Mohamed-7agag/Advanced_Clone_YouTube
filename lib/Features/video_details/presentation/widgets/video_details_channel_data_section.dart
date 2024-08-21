@@ -1,24 +1,25 @@
-import 'package:advanced_youtube/Features/home/data/models/video_model/video_model.dart';
-import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shimmer/shimmer.dart';
 
+import 'package:advanced_youtube/Core/helper/refactor_number_function.dart';
 import 'package:advanced_youtube/Core/utils/app_router.dart';
-import 'package:advanced_youtube/Core/utils/constants.dart';
 import 'package:advanced_youtube/Core/utils/styles.dart';
 import 'package:advanced_youtube/Core/widgets/custom_error_widget.dart';
-import 'package:advanced_youtube/Features/video_details/presentation/widgets/helper.dart';
-import 'package:advanced_youtube/Features/video_details/presentation/widgets/video_details_action_shimmer.dart';
+import 'package:advanced_youtube/Core/widgets/shimmer_effects/video_details_action_shimmer.dart';
+import 'package:advanced_youtube/Features/home/data/models/video_model/video_model.dart';
+import 'package:advanced_youtube/generated/l10n.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../../home/presentation/view_model/channel_details_cubit/channel_details_cubit.dart';
 import 'video_details_subscription_button.dart';
 
 class VideoDetailsChannelDataSection extends StatelessWidget {
-  const VideoDetailsChannelDataSection({super.key, required this.videoModel});
+  const VideoDetailsChannelDataSection(
+      {super.key, required this.videoModel, required this.controller});
   final VideoModel videoModel;
+  final YoutubePlayerController controller;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ChannelDetailsCubit, ChannelDetailsState>(
@@ -29,8 +30,9 @@ class VideoDetailsChannelDataSection extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  InkWell(
+                  GestureDetector(
                     onTap: () {
+                      controller.pause();
                       Navigator.pushNamed(
                         context,
                         AppRouter.channelDetailsViewRoute,
@@ -88,11 +90,7 @@ class VideoDetailsChannelDataSection extends StatelessWidget {
         } else if (state is ChannelDetailsFailure) {
           return const CustomErrorWidget();
         }
-        return Shimmer.fromColors(
-          baseColor: kGrey100,
-          highlightColor: kGrey300,
-          child: const VideoDetailsActionShimmer(),
-        );
+        return const VideoDetailsActionShimmer();
       },
     );
   }
