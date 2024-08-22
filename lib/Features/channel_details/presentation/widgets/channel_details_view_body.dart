@@ -110,7 +110,8 @@ class ChannelDetailsViewBody extends StatelessWidget {
         ),
         SizedBox(height: 20.h),
         Padding(
-padding: const EdgeInsets.symmetric(horizontal: 14),          child: Text(
+          padding: const EdgeInsets.symmetric(horizontal: 14),
+          child: Text(
             S.of(context).popularVideos,
             style: Styles.textStyle18,
           ),

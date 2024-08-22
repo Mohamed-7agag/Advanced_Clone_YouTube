@@ -1,4 +1,5 @@
 import 'package:advanced_youtube/Core/utils/app_router.dart';
+import 'package:advanced_youtube/Core/utils/styles.dart';
 import 'package:advanced_youtube/Features/home/data/models/video_model/video_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class ChannelDetailsVideoItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: 5.h),
-                Text(videoModel.snippet!.publishedAt!.substring(0, 10)),
+                Text(videoModel.snippet!.publishedAt!.substring(0, 10),style: Styles.textStyle12,),
               ],
             ),
           ),

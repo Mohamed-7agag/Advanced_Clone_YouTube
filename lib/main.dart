@@ -1,6 +1,4 @@
-import 'package:advanced_youtube/Core/helper/system_overlay_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,7 +20,7 @@ void main() async {
   setUp();
 
 // Set the system UI overlay style
-  systemOverlayStyle();
+  //systemOverlayStyle();
 
   runApp(
     MultiBlocProvider(

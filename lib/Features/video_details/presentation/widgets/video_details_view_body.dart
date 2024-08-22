@@ -25,8 +25,8 @@ class _VideoDetailsViewBodyState extends State<VideoDetailsViewBody> {
   @override
   void initState() {
     controller = YoutubePlayerController(
-        initialVideoId: widget.videoModel.id?.videoId ?? '',
-        flags: const YoutubePlayerFlags(mute: false));
+      initialVideoId: widget.videoModel.id?.videoId ?? '',
+    );
     super.initState();
   }
 

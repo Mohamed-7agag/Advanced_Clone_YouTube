@@ -41,6 +41,7 @@ class VideoDetailsChannelDataSection extends StatelessWidget {
                     },
                     child: CircleAvatar(
                       radius: 22,
+                      backgroundColor: Colors.grey.shade300,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(50),
                         child: CachedNetworkImage(

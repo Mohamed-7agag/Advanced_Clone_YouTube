@@ -1,4 +1,5 @@
 // ignore_for_file: must_be_immutable
+import 'package:advanced_youtube/Core/utils/app_router.dart';
 import 'package:advanced_youtube/Core/utils/styles.dart';
 import 'package:advanced_youtube/Features/profile/presentation/views/profile_view.dart';
 import 'package:advanced_youtube/Features/subscription/presentation/views/subscription_view.dart';
@@ -8,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../home/presentation/views/home_view.dart';
-import '../home/presentation/views/shorts_videos_view.dart';
 import 'plus_bottomsheet.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
@@ -16,7 +16,6 @@ class CustomBottomAppBar extends StatelessWidget {
 
   List<Widget> screens = [
     const HomeView(),
-    const ShortsVideosView(),
     const SubscriptionView(),
     const ProfileView(),
   ];
@@ -36,7 +35,9 @@ class CustomBottomAppBar extends StatelessWidget {
             type: BottomNavigationBarType.fixed,
             currentIndex: state.index,
             onTap: (index) {
-              if (index == 2) {
+              if (index == 1) {
+                Navigator.pushNamed(context, AppRouter.shortsVideosViewRoute);
+              } else if (index == 2) {
                 openBottomSheet(context);
               } else {
                 context
@@ -78,7 +79,7 @@ class CustomBottomAppBar extends StatelessWidget {
             ],
           ),
           body: IndexedStack(
-            index: state.index >= 2 ? state.index - 1 : state.index,
+            index: state.index >= 1 ? state.index - 2 : state.index,
             children: screens,
           ),
         );
