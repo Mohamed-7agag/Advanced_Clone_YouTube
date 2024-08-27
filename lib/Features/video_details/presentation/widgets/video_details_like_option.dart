@@ -1,3 +1,4 @@
+import 'package:advanced_youtube/Core/utils/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,41 +23,44 @@ class VideoDetailsLikesOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        context.read<VideoInteractiveCubit>().interavtiveToggle(
-              videoModel: videoModel,
-              channelImage: channelImage,
-            );
-      },
-      child: Container(
-        alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        height: 35,
-        decoration: BoxDecoration(
-          color: Colors.grey[200],
-          borderRadius: BorderRadius.circular(50),
-        ),
+    return Container(
+      alignment: Alignment.center,
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      height: 35,
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(50),
+      ),
+      child: BlocProvider(
+        create: (context) => getIt<VideoInteractiveCubit>(),
         child: BlocBuilder<VideoInteractiveCubit, VideoInteractiveState>(
           builder: (context, state) {
             bool ok = context
                 .read<VideoInteractiveCubit>()
                 .isLiked(videoModel: videoModel);
-            return Row(
-              children: [
-                Icon(
-                  ok == true
-                      ? Icons.thumb_up_alt_rounded
-                      : Icons.thumb_up_outlined,
-                  size: 21,
-                ),
-                SizedBox(width: 8.w),
-                Text(
-                  refactNumber(
-                    videoStatisticsModel.statistics!.likeCount,
+            return GestureDetector(
+              onTap: () {
+                context.read<VideoInteractiveCubit>().likedVideoToggle(
+                      videoModel: videoModel,
+                      channelImage: channelImage,
+                    );
+              },
+              child: Row(
+                children: [
+                  Icon(
+                    ok == true
+                        ? Icons.thumb_up_alt_rounded
+                        : Icons.thumb_up_outlined,
+                    size: 21,
                   ),
-                ),
-              ],
+                  SizedBox(width: 8.w),
+                  Text(
+                    refactNumber(
+                      videoStatisticsModel.statistics!.likeCount,
+                    ),
+                  ),
+                ],
+              ),
             );
           },
         ),

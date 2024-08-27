@@ -1,3 +1,4 @@
+import 'package:advanced_youtube/Core/utils/service_locator.dart';
 import 'package:advanced_youtube/Core/utils/styles.dart';
 import 'package:advanced_youtube/Core/widgets/custom_button.dart';
 import 'package:advanced_youtube/Features/home/data/models/channel_detail_model/channel_detail_model.dart';
@@ -90,22 +91,26 @@ class ChannelDetailsViewBody extends StatelessWidget {
         SizedBox(height: 25.h),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14),
-          child: BlocBuilder<SubscriptionCubit, SubscriptionState>(
-            builder: (context, state) {
-              bool ok = context
-                  .read<SubscriptionCubit>()
-                  .isSubscribed(channelDetailModel);
-              return CustomButton(
-                ok: ok,
-                width: MediaQuery.sizeOf(context).width,
-                textStyle: Styles.textStyle15,
-                onPressed: () {
-                  context.read<SubscriptionCubit>().toggleSubscription(
-                        channelDetailModel: channelDetailModel,
-                      );
-                },
-              );
-            },
+          child: BlocProvider(
+            create: (context) => getIt<SubscriptionCubit>(),
+            child: BlocBuilder<SubscriptionCubit, SubscriptionState>(
+              builder: (context, state) {
+                bool ok = context
+                    .read<SubscriptionCubit>()
+                    .getAllSubscribedChannels()
+                    .contains(channelDetailModel);
+                return CustomButton(
+                  ok: ok,
+                  width: MediaQuery.sizeOf(context).width,
+                  textStyle: Styles.textStyle15,
+                  onPressed: () {
+                    context.read<SubscriptionCubit>().toggleSubscription(
+                          channelDetailModel: channelDetailModel,
+                        );
+                  },
+                );
+              },
+            ),
           ),
         ),
         SizedBox(height: 20.h),

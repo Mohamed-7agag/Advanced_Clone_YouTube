@@ -1,3 +1,4 @@
+import 'package:advanced_youtube/Core/utils/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,21 +11,24 @@ class SubscriptionBlocBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SubscriptionCubit, SubscriptionState>(
-      builder: (context, state) {
-        List<ChannelDetailModel> channels =
-            context.read<SubscriptionCubit>().getAllSubscribedChannels();
-        return Expanded(
-          child: ListView.builder(
-            itemCount: channels.length,
-            itemBuilder: (BuildContext context, int index) {
-              return SubscriptionListViewItem(
-                channelDetailModel: channels[index],
-              );
-            },
-          ),
-        );
-      },
+    return BlocProvider(
+      create: (context) => getIt<SubscriptionCubit>(),
+      child: BlocBuilder<SubscriptionCubit, SubscriptionState>(
+        builder: (context, state) {
+          List<ChannelDetailModel> channels =
+              context.read<SubscriptionCubit>().getAllSubscribedChannels();
+          return Expanded(
+            child: ListView.builder(
+              itemCount: channels.length,
+              itemBuilder: (BuildContext context, int index) {
+                return SubscriptionListViewItem(
+                  channelDetailModel: channels[index],
+                );
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -78,10 +78,7 @@ class CustomBottomAppBar extends StatelessWidget {
               ),
             ],
           ),
-          body: IndexedStack(
-            index: state.index >= 1 ? state.index - 2 : state.index,
-            children: screens,
-          ),
+          body: screens[state.index >= 1 ? state.index - 2 : state.index],
         );
       },
     );

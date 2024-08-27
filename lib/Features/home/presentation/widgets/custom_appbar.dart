@@ -11,7 +11,6 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-
       bottom: const PreferredSize(
         preferredSize: Size.fromHeight(45.0),
         child: BottomTabsAppBar(),

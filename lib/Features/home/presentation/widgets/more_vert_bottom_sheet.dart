@@ -1,3 +1,4 @@
+import 'package:advanced_youtube/Core/utils/service_locator.dart';
 import 'package:advanced_youtube/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,59 +34,65 @@ openMoreVertBottomSheet({
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BlocBuilder<VideoInteractiveCubit, VideoInteractiveState>(
-              builder: (context, state) {
-                bool ok = context
-                    .read<VideoInteractiveCubit>()
-                    .isLiked(videoModel: videoModel);
-                return BottomSheetItem(
-                  onTap: () {
-                    context.read<VideoInteractiveCubit>().interavtiveToggle(
-                          videoModel: videoModel,
-                          channelImage: channelDetailModel
-                                  .snippet?.thumbnails?.medium?.url ??
-                              '',
-                        );
-                  },
-                  text: ok == true
-                      ? S.of(context).removeLike
-                      : S.of(context).like,
-                  icon: Icon(
-                    ok == true
-                        ? Icons.thumb_up_alt_rounded
-                        : Icons.thumb_up_alt_outlined,
-                    color: Colors.black87,
-                    size: 22,
-                  ),
-                );
-              },
+            BlocProvider(
+              create: (context) => getIt<VideoInteractiveCubit>(),
+              child: BlocBuilder<VideoInteractiveCubit, VideoInteractiveState>(
+                builder: (context, state) {
+                  bool ok = context
+                      .read<VideoInteractiveCubit>()
+                      .isLiked(videoModel: videoModel);
+                  return BottomSheetItem(
+                    onTap: () {
+                      context.read<VideoInteractiveCubit>().likedVideoToggle(
+                            videoModel: videoModel,
+                            channelImage: channelDetailModel
+                                    .snippet?.thumbnails?.medium?.url ??
+                                '',
+                          );
+                    },
+                    text: ok == true
+                        ? S.of(context).removeLike
+                        : S.of(context).like,
+                    icon: Icon(
+                      ok == true
+                          ? Icons.thumb_up_alt_rounded
+                          : Icons.thumb_up_alt_outlined,
+                      color: Colors.black87,
+                      size: 22,
+                    ),
+                  );
+                },
+              ),
             ),
-            BlocBuilder<SavedVideosCubit, SavedVideosState>(
-              builder: (context, state) {
-                bool ok = context
-                    .read<SavedVideosCubit>()
-                    .isSaved(videoModel: videoModel);
-                return BottomSheetItem(
-                  onTap: () {
-                    context.read<SavedVideosCubit>().savedVideoToggle(
-                          videoModel: videoModel,
-                          channelImage: channelDetailModel
-                                  .snippet?.thumbnails?.medium?.url ??
-                              '',
-                        );
-                  },
-                  text: ok == true
-                      ? S.of(context).removeVideo
-                      : S.of(context).save,
-                  icon: Icon(
-                    ok == true
-                        ? Icons.library_add_check_rounded
-                        : Icons.library_add_outlined,
-                    color: Colors.black87,
-                    size: 23,
-                  ),
-                );
-              },
+            BlocProvider(
+              create: (context) => getIt<SavedVideosCubit>(),
+              child: BlocBuilder<SavedVideosCubit, SavedVideosState>(
+                builder: (context, state) {
+                  bool ok = context
+                      .read<SavedVideosCubit>()
+                      .isSaved(videoModel: videoModel);
+                  return BottomSheetItem(
+                    onTap: () {
+                      context.read<SavedVideosCubit>().savedVideoToggle(
+                            videoModel: videoModel,
+                            channelImage: channelDetailModel
+                                    .snippet?.thumbnails?.medium?.url ??
+                                '',
+                          );
+                    },
+                    text: ok == true
+                        ? S.of(context).removeVideo
+                        : S.of(context).save,
+                    icon: Icon(
+                      ok == true
+                          ? Icons.library_add_check_rounded
+                          : Icons.library_add_outlined,
+                      color: Colors.black87,
+                      size: 23,
+                    ),
+                  );
+                },
+              ),
             ),
             BottomSheetItem(
               onTap: () {

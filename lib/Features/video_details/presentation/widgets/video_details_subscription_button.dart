@@ -1,4 +1,4 @@
-
+import 'package:advanced_youtube/Core/utils/service_locator.dart';
 import 'package:advanced_youtube/Core/utils/styles.dart';
 import 'package:advanced_youtube/Core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -13,20 +13,24 @@ class VideoDetailsSubscriptionButton extends StatelessWidget {
   final ChannelDetailModel channelDetailModel;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SubscriptionCubit, SubscriptionState>(
-      builder: (context, subscriptionState) {
-        bool isSubscribed =
-            context.read<SubscriptionCubit>().isSubscribed(channelDetailModel);
-        return CustomButton(
-          ok: isSubscribed,
-          textStyle: Styles.textStyle13,
-          onPressed: () {
-            context.read<SubscriptionCubit>().toggleSubscription(
-                  channelDetailModel: channelDetailModel,
-                );
-          },
-        );
-      },
+    return BlocProvider(
+      create: (context) => getIt<SubscriptionCubit>(),
+      child: BlocBuilder<SubscriptionCubit, SubscriptionState>(
+        builder: (context, subscriptionState) {
+          bool isSubscribed = context
+              .read<SubscriptionCubit>()
+              .isSubscribed(channelDetailModel);
+          return CustomButton(
+            ok: isSubscribed,
+            textStyle: Styles.textStyle13,
+            onPressed: () {
+              context.read<SubscriptionCubit>().toggleSubscription(
+                    channelDetailModel: channelDetailModel,
+                  );
+            },
+          );
+        },
+      ),
     );
   }
 }

@@ -1,40 +1,59 @@
 import 'dart:convert';
-import 'package:advanced_youtube/Core/utils/constants.dart';
-import 'package:advanced_youtube/Features/home/data/models/channel_detail_model/channel_detail_model.dart';
-import 'package:advanced_youtube/cache/cache_helper.dart';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:advanced_youtube/Core/utils/constants.dart';
+import 'package:advanced_youtube/cache/cache_helper.dart';
+
+import '../../../../home/data/models/channel_detail_model/channel_detail_model.dart';
 
 part 'subscriptions_state.dart';
 
 class SubscriptionCubit extends Cubit<SubscriptionState> {
   SubscriptionCubit() : super(SubscriptionInitial());
 
+//! Get all subscribed channels from cache
+  List<ChannelDetailModel> _getSubscribedChannelsFromCache() {
+    final channelJsonStr = CacheHelper.getString(subscribedChannelsKey);
+
+    if (channelJsonStr.isEmpty) return [];
+
+    List<dynamic> channelsJson = json.decode(channelJsonStr);
+    return channelsJson.map((e) => ChannelDetailModel.fromJson(e)).toList();
+  }
+
+  //! Get all subscribed channels
   List<ChannelDetailModel> getAllSubscribedChannels() {
-    List<String> savedList = CacheHelper.getStringList(subscribedChannelsKey);
-    List<ChannelDetailModel> subscribedChannels = savedList.map((item) {
-      return ChannelDetailModel.fromJson(json.decode(item));
-    }).toList();
-    //emit(SubscriptionUpdate());
-    return subscribedChannels;
+    return _getSubscribedChannelsFromCache();
   }
 
+  //! Check if a channel is subscribed
   bool isSubscribed(ChannelDetailModel channelDetailModel) {
-    List<String> favList = CacheHelper.getStringList(subscribedChannelsKey);
-    String channelDetailModelStr = json.encode(channelDetailModel.toJson());
+    final List<ChannelDetailModel> subscribedChannels =
+        _getSubscribedChannelsFromCache();
+    bool isSubscribed = subscribedChannels.contains(channelDetailModel);
     emit(SubscriptionIsSubscribedDone());
-    return favList.contains(channelDetailModelStr);
+    return isSubscribed;
   }
 
+  //! Toggle subscription
   void toggleSubscription({required ChannelDetailModel channelDetailModel}) {
-    String channelDetailModelStr = json.encode(channelDetailModel.toJson());
-    List<String> savedList = CacheHelper.getStringList(subscribedChannelsKey);
-    if (savedList.contains(channelDetailModelStr)) {
-      savedList.remove(channelDetailModelStr);
+    List<ChannelDetailModel> subscribedChannels =
+        _getSubscribedChannelsFromCache();
+
+    if (isSubscribed(channelDetailModel)) {
+      subscribedChannels.remove(channelDetailModel);
     } else {
-      savedList.add(channelDetailModelStr);
+      subscribedChannels.add(channelDetailModel);
     }
-    CacheHelper.setData(key: subscribedChannelsKey, value: savedList);
+
+    final jsonList =
+        subscribedChannels.map((channel) => channel.toJson()).toList();
+    final jsonStr = json.encode(jsonList);
+
+    CacheHelper.setData(key: subscribedChannelsKey, value: jsonStr);
+
     emit(SubscriptionToggleSuccess());
   }
 }

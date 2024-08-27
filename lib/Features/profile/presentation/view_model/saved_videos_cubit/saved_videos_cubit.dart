@@ -10,41 +10,64 @@ part 'saved_videos_state.dart';
 class SavedVideosCubit extends Cubit<SavedVideosState> {
   SavedVideosCubit() : super(SavedVideosToggle());
 
-  List<String> savedChannelImages = [];
+//! get all saved videos from cache
+  List<VideoModel> _getAllSavedVideosFromCache() {
+    final videosJsonStr = CacheHelper.getString(savedVideosKey);
+    if (videosJsonStr.isEmpty) return [];
 
+    List<dynamic> channelsJson = json.decode(videosJsonStr);
+    return channelsJson.map((e) => VideoModel.fromJson(e)).toList();
+  }
+
+  //! get all saved channels images from cache
+  List<String> _getAllSavedChannelsImagesFromCache() {
+    final channelImagesJsonStr =
+        CacheHelper.getString(savedVideosChannelImageKey);
+    if (channelImagesJsonStr.isEmpty) return [];
+    List<String> jsonList = List<String>.from(json.decode(channelImagesJsonStr));
+    return jsonList;
+  }
+
+//! get all saved videos
+  List<dynamic> getAllsavedVideos() {
+    return [
+      _getAllSavedVideosFromCache(),
+      _getAllSavedChannelsImagesFromCache(),
+    ];
+  }
+
+//! check if a video is saved
+  bool isSaved({required VideoModel videoModel}) {
+    final List<VideoModel> savedVideos = _getAllSavedVideosFromCache();
+    bool isSaved = savedVideos.contains(videoModel);
+    emit(SavedVideosIsSavedDone());
+    return isSaved;
+  }
+
+//! toggle saved videos
   void savedVideoToggle(
       {required VideoModel videoModel, required String channelImage}) {
-    String videoModelStr = json.encode(videoModel.toJson());
-    List<String> savedList = CacheHelper.getStringList(savedVideosKey);
-    if (!savedList.contains(videoModelStr)) {
-      savedList.add(videoModelStr);
-      savedChannelImages.add(channelImage);
+    List<VideoModel> savedVideos = _getAllSavedVideosFromCache();
+    List<String> subscribedChannelsImages =
+        _getAllSavedChannelsImagesFromCache();
+
+    if (isSaved(videoModel: videoModel)) {
+      savedVideos.remove(videoModel);
+      subscribedChannelsImages.remove(channelImage);
     } else {
-      savedList.remove(videoModelStr);
-      savedChannelImages.remove(channelImage);
+      savedVideos.add(videoModel);
+      subscribedChannelsImages.add(channelImage);
     }
-    CacheHelper.setData(key: savedVideosKey, value: savedList);
-    CacheHelper.setData(key: savedVideosChannelImageKey, value: savedChannelImages);
+
+    final jsonList = savedVideos.map((video) => video.toJson()).toList();
+    final jsonStr = json.encode(jsonList);
+
+    final channelImagesJsonStr = json.encode(subscribedChannelsImages);
+
+    CacheHelper.setData(
+        key: savedVideosChannelImageKey, value: channelImagesJsonStr);
+    CacheHelper.setData(key: savedVideosKey, value: jsonStr);
+
     emit(SavedVideosToggle());
-  }
-
-  bool isSaved({required VideoModel videoModel}) {
-    String channelDetailModelStr = json.encode(videoModel.toJson());
-    List<String> savedList = CacheHelper.getStringList(savedVideosKey);
-    emit(SavedVideosIsSavedDone());
-    return savedList.contains(channelDetailModelStr);
-  }
-
-  List<dynamic> getAllsavedVideos() {
-    List<String> savedList = CacheHelper.getStringList(savedVideosKey);
-    List<String> savedChannelImages =
-        CacheHelper.getStringList(savedVideosChannelImageKey);
-
-    List<VideoModel> videos = savedList.map((item) {
-      return VideoModel.fromJson(json.decode(item));
-    }).toList();
-
-    //emit(SavedVideosListUpdate());
-    return [videos, savedChannelImages];
   }
 }

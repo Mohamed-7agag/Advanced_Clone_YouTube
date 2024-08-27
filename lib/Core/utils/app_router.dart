@@ -58,11 +58,7 @@ class AppRouter {
                 ),
               ),
               BlocProvider(create: (_) => BottomNavigationBarCubit()),
-              //BlocProvider(create: (_) => SubscriptionCubit()),
               BlocProvider(create: (_) => TabsCubit()),
-              // BlocProvider(
-              //     create: (_) => VideoInteractiveCubit()..getLikedVideos()),
-              // BlocProvider(create: (_) => SavedVideosCubit()..getsavedVideos()),
             ],
             child: CustomBottomAppBar(),
           ),
@@ -92,9 +88,6 @@ class AppRouter {
                     getIt.get<VideoStatisticsRepoImplement>())
                   ..getVideoStatistics(videoId: args.id?.videoId ?? ''),
               ),
-              // BlocProvider(create: (_) => SubscriptionCubit()),
-              // BlocProvider(create: (_) => VideoInteractiveCubit()),
-              // BlocProvider(create: (_) => SavedVideosCubit()),
               BlocProvider(
                 create: (_) => ChannelDetailsCubit(
                     getIt.get<HomeRepoImplement>())
@@ -115,9 +108,6 @@ class AppRouter {
                     ChannelVideosCubit(getIt.get<ChannelVideosRepoImplement>())
                       ..getChannelVideos(channelId: args.id!),
               ),
-              // BlocProvider.value(
-              //   value: BlocProvider.of<SubscriptionCubit>(_),
-              // ),
             ],
             child: ChannelDetailsView(channelDetailModel: args),
           ),
